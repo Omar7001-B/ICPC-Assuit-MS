@@ -1,0 +1,11 @@
+# Backend
+/Back/node_modules
+/Back/.env
+/Back/logs
+*.log
+
+# Frontend
+/Front/node_modules
+/Front/dist
+/Front/.env
+/Front/.vite
