@@ -29,6 +29,9 @@ const userSchema = new mongoose.Schema({
 
   // Reference to Training
   trainings: [{ type: mongoose.Schema.Types.ObjectId, ref: "Training" }], // Optional
+
+  // Reference to Logs
+  logs: [{ type: mongoose.Schema.Types.ObjectId, ref: "Log" }], // Array of logs for this user
 });
 
 module.exports = mongoose.model("User", userSchema);
