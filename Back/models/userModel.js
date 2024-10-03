@@ -25,7 +25,9 @@ const userSchema = new mongoose.Schema({
   virtualJudgeHandle: { type: String, default: null }, // Optional
 
   // Permissions
-  roles: { type: [String], required: true, default: ["user"] }, // Reference to Role model
+  roles: [
+    { type: mongoose.Schema.Types.ObjectId, ref: "Role", required: true },
+  ], // Reference to Role model
 
   // References
   trainings: [{ type: mongoose.Schema.Types.ObjectId, ref: "Training" }], // Reference to Training model
