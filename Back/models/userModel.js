@@ -24,8 +24,10 @@ const userSchema = new mongoose.Schema({
   codeforcesHandle: { type: String, default: null }, // Optional
   virtualJudgeHandle: { type: String, default: null }, // Optional
 
-  // References
+  // Permissions
   roles: { type: [String], required: true, default: ["user"] }, // Reference to Role model
+
+  // References
   trainings: [{ type: mongoose.Schema.Types.ObjectId, ref: "Training" }], // Reference to Training model
   logs: [{ type: mongoose.Schema.Types.ObjectId, ref: "Log" }], // Reference to Log model
 });
