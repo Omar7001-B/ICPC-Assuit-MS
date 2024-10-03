@@ -24,14 +24,10 @@ const userSchema = new mongoose.Schema({
   codeforcesHandle: { type: String, default: null }, // Optional
   virtualJudgeHandle: { type: String, default: null }, // Optional
 
-  // Roles
-  roles: { type: [String], required: true, default: ["user"] }, // Default role set to 'user'
-
-  // Reference to Training
-  trainings: [{ type: mongoose.Schema.Types.ObjectId, ref: "Training" }], // Optional
-
-  // Reference to Logs
-  logs: [{ type: mongoose.Schema.Types.ObjectId, ref: "Log" }], // Array of logs for this user
+  // References
+  roles: { type: [String], required: true, default: ["user"] }, // Reference to Role model
+  trainings: [{ type: mongoose.Schema.Types.ObjectId, ref: "Training" }], // Reference to Training model
+  logs: [{ type: mongoose.Schema.Types.ObjectId, ref: "Log" }], // Reference to Log model
 });
 
 module.exports = mongoose.model("User", userSchema);

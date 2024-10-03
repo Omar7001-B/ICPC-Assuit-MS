@@ -10,10 +10,10 @@ const trainingSchema = new mongoose.Schema({
   location: { type: String, required: true },
   requirements: { type: [String], default: [] },
   deadline: { type: Date, required: true },
-  participants: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }], // Reference to User model
 
-  // Reference to Logs
-  logs: [{ type: mongoose.Schema.Types.ObjectId, ref: "Log" }], // Array of logs for this training
+  // Reference
+  participants: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }], // Reference to User model
+  logs: [{ type: mongoose.Schema.Types.ObjectId, ref: "Log" }], // Reference to Log model
 });
 
 module.exports = mongoose.model("Training", trainingSchema);
