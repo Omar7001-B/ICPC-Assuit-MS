@@ -34,8 +34,8 @@ This project consists of a backend server built with Node.js and a frontend appl
 
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
-   cd ICPC-MS-Project
+   git clone https://github.com/Omar7001-B/ICPC-Assuit-MS/
+   cd ICPC-Assuit-MS
    ```
 
 2. **Backend Setup**:
