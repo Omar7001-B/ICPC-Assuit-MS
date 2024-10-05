@@ -3,8 +3,8 @@ const mongoose = require("mongoose");
 const trainingSchema = new mongoose.Schema({
   title: { type: String, required: true },
   level: { type: String, required: true }, // Possible values: newcomer, phase1, phase2
-  audience: { type: String, required: true }, // Possible values: newcomer, returning
-  session: { type: String, required: true }, // Possible values: fall, spring, summer, winter
+  session: { type: String, required: false }, // Possible values: fall, spring, summer, winter
+  audience: { type: [String], default: [] },
   start: { type: Date, required: true },
   method: { type: String, required: true }, // Possible values: online, onsite, hybrid
   location: { type: String, required: true },
