@@ -25,5 +25,10 @@ mongoose
 // app.use("/users");
 // app.use("/history");
 
+// Default endpoint
+app.get("/", (req, res) => {
+  res.send("Welcome to the ICPC Training Management System!");
+});
+
 // Start the server using the defined PORT variable
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
