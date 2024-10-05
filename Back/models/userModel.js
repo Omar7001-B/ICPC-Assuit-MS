@@ -8,6 +8,7 @@ const userSchema = new mongoose.Schema({
   nationalID: { type: String, required: true },
   government: { type: String, required: true }, // Region or state
   city: { type: String, required: true }, // Current city of residence
+  facebook: { type: String, default: null },
 
   // Academic Information
   university: { type: String, required: true },
@@ -18,7 +19,6 @@ const userSchema = new mongoose.Schema({
   // Account Information
   gmail: { type: String, required: true },
   password: { type: String, required: true },
-  confirmPassword: { type: String, required: true }, // Handle password confirmation in application logic
 
   // Optional (Competitive Programming)
   codeforcesHandle: { type: String, default: null }, // Optional
