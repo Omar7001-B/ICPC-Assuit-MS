@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
   // Personal Information
@@ -11,7 +11,8 @@ const userSchema = new mongoose.Schema({
       validator: function (v) {
         return /^[a-zA-Z]+$/.test(v); // Only letters allowed
       },
-      message: (props) => `${props.value} is not a valid name!`,
+      message: (props) =>
+        `${props.value} is not a valid name! Only letters are allowed.`,
     },
   },
 
@@ -22,9 +23,10 @@ const userSchema = new mongoose.Schema({
     maxlength: [50, "Last name must be at most 50 characters long"],
     validate: {
       validator: function (v) {
-        return /^[a-zA-Z]+$/.test(v); // Only letters allowed
+        return /^[a-zA-Z]+$/.test(v);
       },
-      message: (props) => `${props.value} is not a valid name!`,
+      message: (props) =>
+        `${props.value} is not a valid name! Only letters are allowed.`,
     },
   },
 
@@ -33,64 +35,134 @@ const userSchema = new mongoose.Schema({
     required: [true, "Phone number is required"],
     validate: {
       validator: function (v) {
-        return /^(010|011|012|015)\d{8}$/.test(v); // Must start with 010, 011, 012, or 015 and be followed by 8 digits
+        return /^(010|011|012|015)\d{8}$/.test(v);
       },
       message: (props) =>
-        `${props.value} is not a valid phone number! It should be 11 digits and start with 010, 011, 012, or 015.`,
+        `${props.value} is not a valid phone number! It should be 11 digits long and start with 010, 011, 012, or 015.`,
     },
   },
+
   nationalID: {
     type: String,
     required: [true, "National ID is required"],
     validate: {
       validator: function (v) {
-        return /^\d{14}$/.test(v); // Must be exactly 14 digits
+        return /^\d{14}$/.test(v);
       },
       message: (props) =>
         `${props.value} is not a valid National ID! It should be exactly 14 digits.`,
     },
   },
-  government: { type: String, required: [true, "Please choose a government"] }, // Region or state // in the front it should be dropdown list of all egypt governments
-  city: { type: String, required: [true, "Please choose a city"] }, // Current city of residence // in the front it should be dropdown list of all egypt governments
-  facebook: { type: String, default: null },
 
-  // Academic Information
-  university: { type: String, required: [true, "Please choose a University"] }, // in the front it should be dropdown list
-  faculty: { type: String, required: [true, "Please choose a faculty"] }, // in the front it should be dropdown list
-  level: { type: String, required: [true, "Please choose a level"] }, // Possible values: undergraduate, graduate // in the front it should be dropdown list
-  academicEmail: { type: String, default: null },
-
-  // Account Information
-  gmail: { type: String, required: true },
-  password: {
+  government: {
     type: String,
-    required: [true, "Password is required"],
+    required: [true, "Please choose a government"],
+  },
+
+  city: {
+    type: String,
+    required: [true, "Please choose a city"],
+  },
+
+  facebook: {
+    type: String,
+    default: null,
+  },
+
+  university: {
+    type: String,
+    required: [true, "Please choose a University"],
+  },
+
+  faculty: {
+    type: String,
+    required: [true, "Please choose a faculty"],
+  },
+
+  level: {
+    type: String,
+    required: [true, "Please choose a level"],
+  },
+
+  academicEmail: {
+    type: String,
+    default: null,
+  },
+
+  gmail: {
+    type: String,
+    required: [true, "Email is required"],
     validate: {
       validator: function (v) {
-        return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(
-          v
-        );
+        return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(v);
       },
-      message: (props) =>
-        `Password is not strong enough! It must be at least 8 characters long, include one uppercase letter, one lowercase letter, one number, and one special character.`,
+      message: (props) => `${props.value} is not a valid email format!`,
     },
   },
 
-  // Optional (Competitive Programming)
+  isGmailVerified: {
+    type: Boolean,
+    required: [true, "You should verify your Gmail account"],
+  },
+
+  password: {
+    type: String,
+    required: [true, "Password is required"],
+    minlength: [1, "Password cannot be an empty string"],
+  },
+
   codeforcesHandle: {
     type: String,
-    required: [true, "Please enter the codeforcesHandle"],
-  }, // it is reqired
-  virtualJudgeHandle: { type: String, default: null }, // Optional
+    required: [true, "Please enter the Codeforces handle"],
+    validate: {
+      validator: function (v) {
+        return /^[a-zA-Z0-9]+$/.test(v); // Only letters and numbers allowed
+      },
+      message: (props) =>
+        `${props.value} is not a valid Codeforces handle! Only letters and numbers are allowed.`,
+    },
+  },
 
-  // Permissions
+  isCodeforcesVerified: {
+    type: Boolean,
+    required: [true, "You should verify your Codeforces handle"],
+  },
+
+  virtualJudgeHandle: {
+    type: String,
+    default: null,
+    validate: {
+      validator: function (v) {
+        return /^[a-zA-Z0-9]*$/.test(v);
+      },
+      message: (props) =>
+        `${props.value} is not a valid Virtual Judge handle! Only letters and numbers are allowed.`,
+    },
+  },
+
   roles: [
-    { type: mongoose.Schema.Types.ObjectId, ref: "Role", required: [true, 'Please choose a role'] },
-  ], // Reference to Role model
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Role",
+      required: [true, "Please choose a role"],
+    },
+  ],
 
   // References
-  trainings: [{ type: mongoose.Schema.Types.ObjectId, ref: "Training" }], // Reference to Training model
-  logs: [{ type: mongoose.Schema.Types.ObjectId, ref: "Log" }], // Reference to Log model
+  trainings: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Training",
+    },
+  ], // Reference to Training model
+
+  logs: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Log",
+    },
+  ], // Reference to Log model
 });
 
-module.exports = mongoose.model("User", userSchema);
+mongoose.model("User", userSchema);
+export default mongoose.model("User");
