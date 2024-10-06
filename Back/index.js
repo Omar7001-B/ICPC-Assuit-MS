@@ -1,12 +1,14 @@
-const express = require("express");
-const cors = require("cors");
-const mongoose = require("mongoose");
-const Role = require("./models/roleModel"); // Adjust the path as necessary
-require("dotenv").config(); // Load environment variables from .env file
+import express from "express";
+import cors from "cors";
+import mongoose from "mongoose";
+import Role from "./models/roleModel.js"; // Make sure the file path is correct and use the `.js` extension in ESM
+import 'dotenv/config'; // Automatically loads environment variables from the .env file
+import singupRouter from "./routers/signup.router.js"; 
+import emailVerificationRouter from "./routers/emailVerificaiton.router.js";
 
 // Define constants for environment variables
 const MONGODB_URI = process.env.MONGODB_URI || ""; // MongoDB connection string
-const PORT = process.env.PORT || 3001; // Server port with a default value
+const PORT = process.env.PORT || 5555; // Server port with a default value
 
 const app = express();
 
@@ -21,9 +23,8 @@ mongoose
   .catch((err) => console.error("MongoDB connection error:", err));
 
 // Routes
-// app.use("/trainings");
-// app.use("/users");
-// app.use("/history");
+app.use(singupRouter);
+app.use(emailVerificationRouter);
 
 // Default endpoint
 app.get("/", (req, res) => {
