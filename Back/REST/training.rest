@@ -38,3 +38,29 @@ Content-Type: application/json
 
 ### Delete a specific training session by ID
 DELETE http://localhost:3001/api/trainings/6704fc35db8e7f7f75d28793
+
+### Add Participants to a Training
+POST http://localhost:3000/trainings/{{trainingId}}/participants
+Content-Type: application/json
+
+{
+  "participants": [
+    "participantId1",
+    "participantId2"
+  ]
+}
+
+### Remove Participants from a Training
+DELETE http://localhost:3000/trainings/{{trainingId}}/participants
+Content-Type: application/json
+
+{
+  "participants": [
+    "participantId1",
+    "participantId2"
+  ]
+}
+
+### Get All Trainings (To check if participants were added/removed)
+GET http://localhost:3000/trainings
+Content-Type: application/json

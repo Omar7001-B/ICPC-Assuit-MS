@@ -64,3 +64,45 @@ export const deleteTraining = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+// Add participants to a training session
+export const addParticipantsToTraining = async (req, res) => {
+  const { participants } = req.body; // Expecting an array of participant IDs
+
+  try {
+    const training = await Training.findById(req.params.id);
+    if (!training)
+      return res.status(404).json({ message: "Training not found" });
+
+    // Add new participants (avoid duplicates)
+    training.participants = [
+      ...new Set([...training.participants, ...participants]),
+    ];
+    await training.save();
+
+    res.status(200).json({ message: "Participants added", training });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// Remove participants from a training session
+export const removeParticipantsFromTraining = async (req, res) => {
+  const { participants } = req.body; // Expecting an array of participant IDs
+
+  try {
+    const training = await Training.findById(req.params.id);
+    if (!training)
+      return res.status(404).json({ message: "Training not found" });
+
+    // Remove participants by filtering out the given IDs
+    training.participants = training.participants.filter(
+      (participantId) => !participants.includes(participantId.toString())
+    );
+    await training.save();
+
+    res.status(200).json({ message: "Participants removed", training });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
