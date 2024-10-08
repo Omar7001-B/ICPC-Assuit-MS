@@ -1,0 +1,40 @@
+### Create a new training session
+POST http://localhost:3001/api/trainings
+Content-Type: application/json
+
+{
+  "title": "Introduction to Node.js",
+  "level": "newcomer",
+  "session": "fall",
+  "audience": ["developers", "students"],
+  "start": "2024-11-01T10:00:00Z",
+  "method": "online",
+  "location": "Online Platform",
+  "requirements": ["Laptop", "Internet connection"],
+  "deadline": "2024-10-25T23:59:59Z"
+}
+
+### Retrieve all training sessions
+GET http://localhost:3001/api/trainings
+
+### Retrieve a specific training session by ID
+GET http://localhost:3001/api/trainings/6704fc35db8e7f7f75d28793
+
+### Update a specific training session by ID
+PUT http://localhost:3001/api/trainings/6704fc35db8e7f7f75d28793
+Content-Type: application/json
+
+{
+  "title": "Phase1 First Term Training 2024",
+  "level": "phase1",
+  "session": "spring",
+  "audience": ["experienced developers"],
+  "start": "2024-10-01T10:00:00Z",
+  "method": "hybrid",
+  "location": "Hybrid Platform",
+  "requirements": ["Laptop", "Strong understanding of JavaScript", "New Commer Sheet"],
+  "deadline": "2025-01-20T23:59:59Z"
+}
+
+### Delete a specific training session by ID
+DELETE http://localhost:3001/api/trainings/6704fc35db8e7f7f75d28793
