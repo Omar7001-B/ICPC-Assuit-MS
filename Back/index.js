@@ -2,8 +2,8 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import Role from "./models/roleModel.js"; // Make sure the file path is correct and use the `.js` extension in ESM
-import 'dotenv/config'; // Automatically loads environment variables from the .env file
-import singupRouter from "./routers/signup.router.js"; 
+import "dotenv/config"; // Automatically loads environment variables from the .env file
+import singupRouter from "./routers/signup.router.js";
 import emailVerificationRouter from "./routers/emailVerificaiton.router.js";
 
 // Define constants for environment variables
