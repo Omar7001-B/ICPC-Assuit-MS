@@ -1,0 +1,7 @@
+## Send Verification Email
+POST http://localhost:3001/api/emailVerification
+Content-Type: application/json
+
+{
+  "email": "benjami4n@gmail.com"
+}
