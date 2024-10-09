@@ -6,6 +6,7 @@ import 'dotenv/config'; // Automatically loads environment variables from the .e
 import singupRouter from "./routers/signup.router.js"; 
 import emailVerificationRouter from "./routers/emailVerificaiton.router.js";
 import codeforcesRouter from "./routers/codeforces.router.js";
+import loginRouter from "./routers/login.router.js";
 
 // Define constants for environment variables
 const MONGODB_URI = process.env.MONGODB_URI || ""; // MongoDB connection string
@@ -25,8 +26,10 @@ mongoose
 
 // Routes
 app.use(singupRouter);
+app.use(loginRouter);
 app.use(emailVerificationRouter);
 app.use(codeforcesRouter);
+
 
 // Default endpoint
 app.get("/", (req, res) => {
