@@ -56,6 +56,7 @@ export const signupController = async (req, res) => {
 
     newUser.token = token;
     await newUser.validate();
+    //console.log(newUser);
     await newUser.save();
 
     res.status(201).json({
