@@ -3,7 +3,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import Role from "./models/roleModel.js"; // Make sure the file path is correct and use the `.js` extension in ESM
 import 'dotenv/config'; // Automatically loads environment variables from the .env file
-import singupRouter from "./routers/auth.router.js"; 
+import authRouter from "./routers/auth.router.js"; 
 import emailVerificationRouter from "./routers/emailVerificaiton.router.js";
 import codeforcesRouter from "./routers/codeforces.router.js";
 
@@ -24,7 +24,7 @@ mongoose
   .catch((err) => console.error("MongoDB connection error:", err));
 
 // Routes
-app.use(singupRouter);
+app.use(authRouter);
 app.use(emailVerificationRouter);
 app.use(codeforcesRouter);
 
