@@ -33,6 +33,7 @@ const userSchema = new mongoose.Schema({
   phone: {
     type: String,
     required: [true, "Phone number is required"],
+    unique: true, 
     validate: {
       validator: function (v) {
         return /^(010|011|012|015)\d{8}$/.test(v);
@@ -45,6 +46,7 @@ const userSchema = new mongoose.Schema({
   nationalID: {
     type: String,
     required: [true, "National ID is required"],
+    unique: true, 
     validate: {
       validator: function (v) {
         return /^\d{14}$/.test(v);
@@ -66,6 +68,7 @@ const userSchema = new mongoose.Schema({
 
   facebook: {
     type: String,
+    unique: true, 
     default: null,
   },
 
@@ -86,12 +89,14 @@ const userSchema = new mongoose.Schema({
 
   academicEmail: {
     type: String,
+    unique: true, 
     default: null,
   },
 
   gmail: {
     type: String,
     required: [true, "Email is required"],
+    unique: true, 
     validate: {
       validator: function (v) {
         return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(v);
@@ -114,6 +119,7 @@ const userSchema = new mongoose.Schema({
   codeforcesHandle: {
     type: String,
     required: [true, "Please enter the Codeforces handle"],
+    unique: [true], 
     validate: {
       validator: function (v) {
         return /^[a-zA-Z0-9]+$/.test(v); // Only letters and numbers allowed
@@ -131,6 +137,7 @@ const userSchema = new mongoose.Schema({
   virtualJudgeHandle: {
     type: String,
     default: null,
+    unique: true, 
     validate: {
       validator: function (v) {
         return /^[a-zA-Z0-9]*$/.test(v);
