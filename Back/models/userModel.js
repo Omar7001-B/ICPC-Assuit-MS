@@ -148,6 +148,11 @@ const userSchema = new mongoose.Schema({
     },
   ],
 
+
+  token: {
+    type: String,
+    required: [true, "Token is required"],
+  },
   // References
   trainings: [
     {
@@ -162,6 +167,8 @@ const userSchema = new mongoose.Schema({
       ref: "Log",
     },
   ], // Reference to Log model
+
+
 });
 
 mongoose.model("User", userSchema);
