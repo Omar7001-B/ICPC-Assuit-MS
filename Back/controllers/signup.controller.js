@@ -52,7 +52,8 @@ export const signupController = async (req, res) => {
         lastName: newUser.lastName,
         email: newUser.email,
         role: newUser.role,
-        codeforcesHandle: newUser.codeforcesHandle}) ; 
+        codeforcesHandle: newUser.codeforcesHandle}
+      ); 
 
     newUser.token = token;
     await newUser.validate();
