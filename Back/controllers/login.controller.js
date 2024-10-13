@@ -32,7 +32,8 @@ export const loginController = async (req, res) => {
             lastName: inUser.lastName,
             email: inUser.email,
             role: inUser.role,
-            codeforcesHandle: inUser.codeforcesHandle
+            codeforcesHandle: inUser.codeforcesHandle ,
+            id : inUser._id
         });
 
         inUser.token = token;
