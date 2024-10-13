@@ -1,3 +1,4 @@
+
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
@@ -12,10 +13,16 @@ const MONGODB_URI = process.env.MONGODB_URI || ""; // MongoDB connection string
 const PORT = process.env.PORT || 5555; // Server port with a default value
 
 const app = express();
-
+const rolesRoute = require("./routes/role");
 // Middleware
 app.use(express.json());
 app.use(cors());
+
+// Routes
+// app.use("/trainings");
+// app.use("/users");
+// app.use("/history");
+app.use("/role", rolesRoute);
 
 // Connect to MongoDB using the connection string from the .env file
 mongoose
