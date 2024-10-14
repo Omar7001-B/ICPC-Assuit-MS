@@ -1,14 +1,14 @@
-const roleModel = require("../models/roleModel");
+import Role from "../models/roleModel.js";
 
-let getAll = async (req, res) => {
-  let roles = await roleModel.find();
+export const getAll = async (req, res) => {
+  let roles = await Role.find();
   res.json({ data: roles });
 };
 
-let edit = async (req, res) => {
+export const edit = async (req, res) => {
   let id = req.params.id;
   let body = req.body;
-  let editOne = await roleModel.findByIdAndUpdate(
+  let editOne = await Role.findByIdAndUpdate(
     id,
     { name: body.name },
     { new: true }
@@ -23,40 +23,40 @@ let edit = async (req, res) => {
   }
 };
 
-let getById = async (req, res) => {
+export const getById = async (req, res) => {
   let id = req.params.id;
   try {
-    let role = await roleModel.find({ _id: id });
+    let role = await Role.find({ _id: id });
     res.json({ data: role });
   } catch (err) {
     res.json({ message: "faield" });
   }
 };
 
-let create = async (req, res) => {
+export const create = async (req, res) => {
   let newrole = req.body;
   try {
-    await roleModel.create(newrole);
-    res.json({ message: "added successfully", data: await roleModel.find() });
+    await Role.create(newrole);
+    res.json({ message: "added successfully", data: await Role.find() });
   } catch {
     res.json({ message: "faield" });
   }
 };
 
-let deleteById = async (req, res) => {
+export const deleteById = async (req, res) => {
   let id = req.params.id;
-  let deleteOne = await roleModel.findByIdAndDelete(id);
+  let deleteOne = await Role.findByIdAndDelete(id);
   if (deleteOne) {
-    res.json({ message: "successfully deleted", data: await roleModel.find() });
+    res.json({ message: "successfully deleted", data: await Role.find() });
   } else {
     res.json({ message: "faield" });
   }
 };
 
-let replace = async (req, res) => {
+export const replace = async (req, res) => {
   let id = req.params.id;
   let body = req.body;
-  let replaceOne = await roleModel.findOneAndReplace({ _id: id }, body, {
+  let replaceOne = await Role.findOneAndReplace({ _id: id }, body, {
     new: true,
   });
   if (replaceOne) {
@@ -69,11 +69,3 @@ let replace = async (req, res) => {
   }
 };
 
-module.exports = {
-  getAll,
-  edit,
-  getById,
-  create,
-  deleteById,
-  replace,
-};

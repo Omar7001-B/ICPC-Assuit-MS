@@ -2,18 +2,18 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-import Role from "./models/roleModel.js"; // Make sure the file path is correct and use the `.js` extension in ESM
+import roleRouter from "./routers/role.router.js"; // Make sure the file path is correct and use the `.js` extension in ESM
 import 'dotenv/config'; // Automatically loads environment variables from the .env file
 import authRouter from "./routers/auth.router.js"; 
 import emailVerificationRouter from "./routers/emailVerificaiton.router.js";
 import codeforcesRouter from "./routers/codeforces.router.js";
+import applicationRouter from './routers/application.router.js';
 
 // Define constants for environment variables
 const MONGODB_URI = process.env.MONGODB_URI || ""; // MongoDB connection string
 const PORT = process.env.PORT || 5555; // Server port with a default value
 
 const app = express();
-const rolesRoute = require("./routes/role");
 // Middleware
 app.use(express.json());
 app.use(cors());
@@ -22,7 +22,7 @@ app.use(cors());
 // app.use("/trainings");
 // app.use("/users");
 // app.use("/history");
-app.use("/role", rolesRoute);
+app.use("/role", roleRouter);
 
 // Connect to MongoDB using the connection string from the .env file
 mongoose
@@ -34,6 +34,7 @@ mongoose
 app.use(authRouter);
 app.use(emailVerificationRouter);
 app.use(codeforcesRouter);
+app.use("/Applies",applicationRouter);
 
 // Default endpoint
 app.get("/", (req, res) => {
