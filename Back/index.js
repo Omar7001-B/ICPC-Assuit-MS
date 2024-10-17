@@ -37,7 +37,7 @@ app.use("/api/trainings", trainingRouter); // Omar
 app.use("/api/emailVerification", emailVerificationRouter); // Following /api/emailVerification style
 app.use(authRouter);
 app.use(codeforcesRouter);
-app.use("/Applies", applicationRouter);
+app.use("/api/Applications", applicationRouter);
 
 // Default endpoint
 app.get("/", (req, res) => {
