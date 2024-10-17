@@ -12,3 +12,5 @@ const verifyToken= (req,res,next)=>{
         return res.status(403).json({message:"Unauthorized"});
     }
 }
+
+export default verifyToken;
