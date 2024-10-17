@@ -1,5 +1,7 @@
 import bcrypt from "bcrypt";
 import User from "../models/userModel.js";
+import jwt from "jsonwebtoken";
+import { generateJWT } from "../utils/generate.JWT.js";
 
 // Signup Controller
 export const signupController = async (req, res) => {
@@ -42,10 +44,22 @@ export const signupController = async (req, res) => {
       const salt = await bcrypt.genSalt(10);
       userData.password = await bcrypt.hash(userData.password, salt);
     }
-
+    
     const newUser = new User(userData);
+    // generating JWT token
+    const token = await generateJWT({
+        firstName: newUser.firstName, 
+        lastName: newUser.lastName,
+        email: newUser.email,
+        role: newUser.role,
+        codeforcesHandle: newUser.codeforcesHandle}
+      ); 
+
+    newUser.token = token;
     await newUser.validate();
+    //console.log(newUser);
     await newUser.save();
+
     res.status(201).json({
       status: "success",
       data: {
