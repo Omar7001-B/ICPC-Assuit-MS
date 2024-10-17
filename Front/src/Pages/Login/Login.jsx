@@ -18,17 +18,20 @@ export default function Login() {
     try {
       const response = await axiosInstance.post('api/auth/login', loginData);
       if(response.status==="fail"){
-        //something
+        setErrorMessage(1);
       }else{
         localStorage.setItem("token",response.data);
-        navigate("/");
+        setErrorMessage(0);
+        navigate("/home");
       }
     } catch {
       console.error('Error logging in: Login Failed');
+      setErrorMessage(1);
     }
   };
 
   const navigate = useNavigate();
+  const [errorMessage, setErrorMessage]=useState(0);
   const [logoShadow, setLogoShadow] = useState(0);
   const [emailBorderWidth, setemailBorderWidth] = useState("1px");
   const [emailBoxShadowBlur, setemailBoxShadowBlur] = useState("0px");
@@ -188,12 +191,12 @@ export default function Login() {
               />
               <label htmlFor="floatingPasswordCustom">Password</label>
             </Form.Floating>
-
+            { errorMessage ? <span style={{color:"red",marginTop:"2px"}}>The gmail or password you entered is incorrect.</span>:<></>}
             <Link
               to="/forgetPassword"
               style={{
                 color: forgetPasswordColor,
-                margin: "10px 270px 10px 0px",
+                margin: `${errorMessage?4:10}px 270px 10px 0px`,
               }}
               onPointerEnter={() => {
                 setForgetPasswordColor("rgb(255,0,0,0.9)");
