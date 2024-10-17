@@ -10,8 +10,49 @@ export default function Signup() {
     const navigate = useNavigate();
     const [logoShadow, setLogoShadow] = useState(false);
     const [currentStep, setCurrentStep] = useState(1);
-
     const totalSteps = 4;
+
+    // State to hold data for each step
+    const [formData, setFormData] = useState({
+        personalInfo: {
+            firstName: "",
+            lastName: "",
+            phone: "",
+            nationalId: "",
+            government: "",
+            city: "",
+        },
+        academicInfo: {
+            university: "",
+            faculty: "",
+            level: "",
+            academicEmail: "",
+        },
+        accountInfo: {
+            gmail: "",
+            password: "",
+            confirmPassword: "",
+        },
+        competitiveInfo: {
+            codeforcesHandle: "",
+            virtualJudgeHandle: "",
+        },
+    });
+
+    // Handler to update form data
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        const stepKeys = ["personalInfo", "academicInfo", "accountInfo", "competitiveInfo"];
+        const stepKey = stepKeys[currentStep - 1];
+
+        setFormData((prevData) => ({
+            ...prevData,
+            [stepKey]: {
+                ...prevData[stepKey],
+                [name]: value,
+            },
+        }));
+    };
 
     const nextStep = () => {
         if (currentStep < totalSteps) setCurrentStep(currentStep + 1);
@@ -19,6 +60,18 @@ export default function Signup() {
 
     const prevStep = () => {
         if (currentStep > 1) setCurrentStep(currentStep - 1);
+    };
+
+    const verifyCodeforcesHandle = () => {
+        if (formData.competitiveInfo.codeforcesHandle.length === 0) {
+        } else {
+        }
+    };
+
+    const handleSubmit = (e) => {
+        console.log(formData);
+        console.log("Current step:", currentStep);
+        //e.preventDefault();
     };
 
     return (
@@ -89,27 +142,57 @@ export default function Signup() {
                                 <>
                                     <h5 style={{ color: "#dfdfdf" }}>Personal Information</h5>
                                     <Form.Floating className="mb-3">
-                                        <Form.Control placeholder="First Name" />
+                                        <Form.Control
+                                            name="firstName"
+                                            value={formData.personalInfo.firstName}
+                                            onChange={handleChange}
+                                            placeholder="First Name"
+                                        />
                                         <label>First Name</label>
                                     </Form.Floating>
                                     <Form.Floating className="mb-3">
-                                        <Form.Control placeholder="Last Name" />
+                                        <Form.Control
+                                            name="lastName"
+                                            value={formData.personalInfo.lastName}
+                                            onChange={handleChange}
+                                            placeholder="Last Name"
+                                        />
                                         <label>Last Name</label>
                                     </Form.Floating>
                                     <Form.Floating className="mb-3">
-                                        <Form.Control placeholder="Phone" />
+                                        <Form.Control
+                                            name="phone"
+                                            value={formData.personalInfo.phone}
+                                            onChange={handleChange}
+                                            placeholder="Phone"
+                                        />
                                         <label>Phone</label>
                                     </Form.Floating>
                                     <Form.Floating className="mb-3">
-                                        <Form.Control placeholder="National ID" />
+                                        <Form.Control
+                                            name="nationalId"
+                                            value={formData.personalInfo.nationalId}
+                                            onChange={handleChange}
+                                            placeholder="National ID"
+                                        />
                                         <label>National ID</label>
                                     </Form.Floating>
                                     <Form.Floating className="mb-3">
-                                        <Form.Control placeholder="Government" />
+                                        <Form.Control
+                                            name="government"
+                                            value={formData.personalInfo.government}
+                                            onChange={handleChange}
+                                            placeholder="Government"
+                                        />
                                         <label>Government</label>
                                     </Form.Floating>
                                     <Form.Floating className="mb-3">
-                                        <Form.Control placeholder="City" />
+                                        <Form.Control
+                                            name="city"
+                                            value={formData.personalInfo.city}
+                                            onChange={handleChange}
+                                            placeholder="City"
+                                        />
                                         <label>City</label>
                                     </Form.Floating>
                                 </>
@@ -119,19 +202,39 @@ export default function Signup() {
                                 <>
                                     <h5 style={{ color: "#dfdfdf" }}>Academic Information</h5>
                                     <Form.Floating className="mb-3">
-                                        <Form.Control placeholder="University" />
+                                        <Form.Control
+                                            name="university"
+                                            value={formData.academicInfo.university}
+                                            onChange={handleChange}
+                                            placeholder="University"
+                                        />
                                         <label>University</label>
                                     </Form.Floating>
                                     <Form.Floating className="mb-3">
-                                        <Form.Control placeholder="Faculty" />
+                                        <Form.Control
+                                            name="faculty"
+                                            value={formData.academicInfo.faculty}
+                                            onChange={handleChange}
+                                            placeholder="Faculty"
+                                        />
                                         <label>Faculty</label>
                                     </Form.Floating>
                                     <Form.Floating className="mb-3">
-                                        <Form.Control placeholder="Level" />
+                                        <Form.Control
+                                            name="level"
+                                            value={formData.academicInfo.level}
+                                            onChange={handleChange}
+                                            placeholder="Level"
+                                        />
                                         <label>Level</label>
                                     </Form.Floating>
                                     <Form.Floating className="mb-3">
-                                        <Form.Control placeholder="Academic Email" />
+                                        <Form.Control
+                                            name="academicEmail"
+                                            value={formData.academicInfo.academicEmail}
+                                            onChange={handleChange}
+                                            placeholder="Academic Email"
+                                        />
                                         <label>Academic Email</label>
                                     </Form.Floating>
                                 </>
@@ -140,45 +243,134 @@ export default function Signup() {
                             {currentStep === 3 && (
                                 <>
                                     <h5 style={{ color: "#dfdfdf" }}>Account Information</h5>
+
+                                    {/* Email Input with Send Code Button */}
+                                    <Form.Group className="mb-3 d-flex align-items-center">
+                                        <Form.Floating className="flex-grow-1">
+                                            <Form.Control
+                                                name="gmail"
+                                                // Value is bound to the Gmail input in formData
+                                                value={formData.accountInfo.gmail}
+                                                // Updates the formData state on change
+                                                onChange={handleChange}
+                                                placeholder="Gmail"
+                                            />
+                                            <label>Gmail</label>
+                                        </Form.Floating>
+                                        {/* Send Code Button */}
+                                        <Button
+                                            variant="outline-light"
+                                            // Function to send the verification code
+                                            // onClick={sendVerificationCode}
+                                            style={{ marginLeft: '10px' }}
+                                        >
+                                            Send Code
+                                        </Button>
+                                    </Form.Group>
+
+                                    {/* Verification Code Input */}
+                                    <Form.Group className="mb-3 d-flex align-items-center">
+                                        <Form.Floating className="flex-grow-1">
+                                            <Form.Control
+                                                name="verificationCode"
+                                                // Value is bound to the verification code input in formData
+                                                value={formData.accountInfo.verificationCode}
+                                                // Updates the formData state on change
+                                                onChange={handleChange}
+                                                placeholder="Verification Code"
+                                            />
+                                            <label>Verification Code</label>
+                                        </Form.Floating>
+                                        {/* Verify Button */}
+                                        <Button
+                                            variant="outline-light"
+                                            // Function to verify the entered code
+                                            // onClick={verifyCode}
+                                            style={{ marginLeft: '10px' }}
+                                        >
+                                            Verify
+                                        </Button>
+                                    </Form.Group>
+
+                                    {/* Password Inputs */}
                                     <Form.Floating className="mb-3">
-                                        <Form.Control placeholder="Gmail" />
-                                        <label>Gmail</label>
-                                    </Form.Floating>
-                                    <Form.Floating className="mb-3">
-                                        <Form.Control type="password" placeholder="Password" />
+                                        <Form.Control
+                                            name="password"
+                                            type="password"
+                                            // Value is bound to the password input in formData
+                                            value={formData.accountInfo.password}
+                                            // Updates the formData state on change
+                                            onChange={handleChange}
+                                            placeholder="Password"
+                                        />
                                         <label>Password</label>
                                     </Form.Floating>
                                     <Form.Floating className="mb-3">
-                                        <Form.Control type="password" placeholder="Confirm Password" />
+                                        <Form.Control
+                                            name="confirmPassword"
+                                            type="password"
+                                            // Value is bound to the confirm password input in formData
+                                            value={formData.accountInfo.confirmPassword}
+                                            // Updates the formData state on change
+                                            onChange={handleChange}
+                                            placeholder="Confirm Password"
+                                        />
                                         <label>Confirm Password</label>
                                     </Form.Floating>
                                 </>
                             )}
 
+
+
                             {currentStep === 4 && (
                                 <>
                                     <h5 style={{ color: "#dfdfdf" }}>Competitive Programming (Optional)</h5>
+
+                                    {/* Codeforces Handle Input with Verify Button */}
+                                    <Form.Group className="mb-3 d-flex align-items-center">
+                                        <Form.Floating className="flex-grow-1">
+                                            <Form.Control
+                                                name="codeforcesHandle"
+                                                value={formData.competitiveInfo.codeforcesHandle}
+                                                onChange={handleChange}
+                                                placeholder="Codeforces Handle"
+                                            />
+                                            <label>Codeforces Handle</label>
+                                        </Form.Floating>
+                                        {/* Verify Button for Codeforces Handle */}
+                                        <Button
+                                            variant="outline-light"
+                                            // Function to verify the Codeforces handle
+                                            onClick={verifyCodeforcesHandle}
+                                            style={{ marginLeft: '10px' }}
+                                        >
+                                            Verify
+                                        </Button>
+                                    </Form.Group>
+
+                                    {/* Virtual Judge Handle Input */}
                                     <Form.Floating className="mb-3">
-                                        <Form.Control placeholder="Codeforces Handle" />
-                                        <label>Codeforces Handle</label>
-                                    </Form.Floating>
-                                    <Form.Floating className="mb-3">
-                                        <Form.Control placeholder="Virtual Judge Handle" />
+                                        <Form.Control
+                                            name="virtualJudgeHandle"
+                                            value={formData.competitiveInfo.virtualJudgeHandle}
+                                            onChange={handleChange}
+                                            placeholder="Virtual Judge Handle"
+                                        />
                                         <label>Virtual Judge Handle</label>
                                     </Form.Floating>
                                 </>
                             )}
 
+
                             <div className="d-flex justify-content-between mt-4">
-                                {currentStep > 1 && (
-                                    <Button
-                                        variant="outline-light"
-                                        onClick={prevStep}
-                                        style={{ width: "100px" }}
-                                    >
-                                        Previous
-                                    </Button>
-                                )}
+                                <Button
+                                    variant="outline-light"
+                                    onClick={prevStep}
+                                    disabled={currentStep === 1}
+                                    style={{ width: "100px" }}
+                                >
+                                    Back
+                                </Button>
                                 {currentStep < totalSteps ? (
                                     <Button
                                         variant="outline-light"
@@ -190,6 +382,7 @@ export default function Signup() {
                                 ) : (
                                     <Button
                                         // type="submit"
+                                        onClick={handleSubmit}
                                         variant="outline-light"
                                         style={{ width: "100px" }}
                                     >
@@ -198,9 +391,20 @@ export default function Signup() {
                                 )}
                             </div>
                         </Form>
+                        <div style={{ marginTop: "20px" }}>
+                            <Link
+                                to="/login"
+                                style={{
+                                    color: "#dfdfdf",
+                                    textDecoration: "none",
+                                }}
+                            >
+                                Already have an account? Login
+                            </Link>
+                        </div>
                     </Col>
                 </Row>
             </Container>
-        </div>
+        </div >
     );
 }
