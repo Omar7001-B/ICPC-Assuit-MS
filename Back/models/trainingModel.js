@@ -16,4 +16,6 @@ const trainingSchema = new mongoose.Schema({
   logs: [{ type: mongoose.Schema.Types.ObjectId, ref: "Log" }], // Reference to Log model
 });
 
-module.exports = mongoose.model("Training", trainingSchema);
+// Export the Training model using ES Module syntax
+const Training = mongoose.model("Training", trainingSchema);
+export default Training;

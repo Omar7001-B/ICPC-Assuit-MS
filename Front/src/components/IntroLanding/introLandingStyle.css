@@ -1,0 +1,22 @@
+.intro{
+    display: flex;
+    flex-flow:column wrap;
+    justify-content: center;
+    align-items: center;
+    height: 780px;
+    overflow: hidden;
+    font-size: 45px;
+    position: relative;
+    color: rgb(255, 255, 255);
+    text-shadow: 6px 0px 6px red,0px 6px 6px green,6px 6px 6px black;
+}
+.intro::before{
+    content: " ";
+    position: absolute;
+    background: black url("/src/assets/Images/ICPC-Logo.png") center center no-repeat;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    filter: blur(15px);
+    transform: scale(1.1);
+}

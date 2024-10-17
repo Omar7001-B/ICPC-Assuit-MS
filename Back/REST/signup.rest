@@ -1,0 +1,26 @@
+## Sign Up with Complete User Profile and Valid ObjectIds for Roles
+POST http://localhost:3001/api/signup
+Content-Type: application/json
+
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "phone": "01234567891",
+  "nationalID": "12345678901234",
+  "government": "",
+  "city": "Cairo",
+  "facebook": "https://facebook.com/johndoe",
+  "university": "Cairo University",
+  "faculty": "Computer Science",
+  "level": "",
+  "academicEmail": "",
+  "gmail": "joh2n.doe@example.com",
+  "password": "$2b$10$khUFiTrBZm5IHEnYVHFUquMUdz9qlITjy6.WpUWRziAzUpgdgVTcm",
+  "codeforcesHandle": "JohnDoe123",
+  "virtualJudgeHandle": "JDoeVJ",
+  "roles": ["651e3a546fb35a0014a8cd10", "651e3a546fb35a0014a8cd11"],
+  "trainings": ["651e3a546fb35a0014a8cd10"],
+  "logs": [],
+  "isGmailVerified": true,
+  "isCodeforcesVerified": false
+}

@@ -14,7 +14,7 @@ export const loginController = async (req, res) => {
 
     console.log(userData.gmail) ; 
     const inUser = await User.findOne( { $or: [{ gmail: userData.gmail },
-                                               { codeforcesHandle: userData.gmail }] } );
+                                           { codeforcesHandle: userData.gmail }] } );
 
     if (!inUser) {
         return res.status(400).json({
@@ -23,10 +23,12 @@ export const loginController = async (req, res) => {
             data: null,
         });
     }
-
-    const ismatch = await bcrypt.compare(userData.password, inUser.password)
+    console.log(inUser);
+    console.log(userData);
+    
+    const ismatch = await bcrypt.compare(userData.password, inUser.password);
+    
     if(ismatch){
-       
         const token = await generateJWT({
             firstName: inUser.firstName,
             lastName: inUser.lastName,
@@ -35,7 +37,6 @@ export const loginController = async (req, res) => {
             codeforcesHandle: inUser.codeforcesHandle ,
             id : inUser._id
         });
-
         inUser.token = token;
         inUser.save();
 

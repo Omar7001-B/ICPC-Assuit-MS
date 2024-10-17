@@ -8,4 +8,6 @@ const logSchema = new mongoose.Schema({
   timestamp: { type: Date, default: Date.now }, // When the action occurred
 });
 
-module.exports = mongoose.model("Log", logSchema);
+// Export the Log model using ES Module syntax
+const Log = mongoose.model("Log", logSchema);
+export default Log;

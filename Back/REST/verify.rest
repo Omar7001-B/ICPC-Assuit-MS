@@ -1,0 +1,7 @@
+## Check Verification Code
+POST http://localhost:3001/api/checkCode
+Content-Type: application/json
+
+{
+  "code": "87186"  
+}
