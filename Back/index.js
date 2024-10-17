@@ -8,6 +8,8 @@ import authRouter from "./routers/auth.router.js";
 import emailVerificationRouter from "./routers/emailVerificaiton.router.js";
 import codeforcesRouter from "./routers/codeforces.router.js";
 import applicationRouter from './routers/application.router.js';
+import userRouter from "./routers/user.router.js";
+import  verifyToken  from "./middlewares/verifyToken.js";
 
 // Define constants for environment variables
 const MONGODB_URI = process.env.MONGODB_URI || ""; // MongoDB connection string
@@ -35,6 +37,7 @@ app.use(authRouter);
 app.use(emailVerificationRouter);
 app.use(codeforcesRouter);
 app.use("/Applies",applicationRouter);
+app.use("/api", verifyToken , userRouter);
 
 // Default endpoint
 app.get("/", (req, res) => {
