@@ -1,6 +1,5 @@
 import bcrypt from "bcrypt";
 import User from "../models/userModel.js";
-import jwt from "jsonwebtoken";
 import { generateJWT } from "../utils/generate.JWT.js";
 
 // expexted request body
