@@ -15,7 +15,7 @@ This project consists of a backend server built with Node.js and a frontend appl
 ```
 /ICPC-MS-Project
 │
-├── /back                  # Backend server
+├── /Back                  # Backend server
 │   ├── index.js          # Main server file
 │   ├── models/            # Mongoose models
 │   ├── routes/            # API route definitions
@@ -23,7 +23,7 @@ This project consists of a backend server built with Node.js and a frontend appl
 │   ├── .env               # Environment variables
 │   └── package.json       # Node.js dependencies
 │
-└── /front                 # Frontend application
+└── /Front                 # Frontend application
     ├── src/              # React source files
     ├── index.html        # Main HTML file
     ├── .env              # Environment variables
@@ -41,7 +41,7 @@ This project consists of a backend server built with Node.js and a frontend appl
 2. **Backend Setup**:
    - Navigate to the backend directory:
      ```bash
-     cd back
+     cd Back
      ```
    - Install backend dependencies:
      ```bash
@@ -51,7 +51,7 @@ This project consists of a backend server built with Node.js and a frontend appl
 3. **Frontend Setup**:
    - Navigate to the frontend directory:
      ```bash
-     cd ../front
+     cd ../Front
      ```
    - Install frontend dependencies:
      ```bash
@@ -62,13 +62,13 @@ This project consists of a backend server built with Node.js and a frontend appl
 
 - **Start the backend development server**:
   ```bash
-  cd back
+  cd Back
   npm run devStart
   ```
 
 - **Start the frontend development server**:
   ```bash
-  cd ../front
+  cd ../Front
   npm run dev
   ```
 
