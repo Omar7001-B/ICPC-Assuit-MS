@@ -7,11 +7,10 @@ import "dotenv/config"; // Automatically loads environment variables from the .e
 import authRouter from "./routers/auth.router.js";
 import emailVerificationRouter from "./routers/emailVerificaiton.router.js";
 import codeforcesRouter from "./routers/codeforces.router.js";
-import applicationRouter from './routers/application.router.js';
+import applicationRouter from "./routers/application.router.js";
 import userRouter from "./routers/user.router.js";
-import  verifyToken  from "./middlewares/verifyToken.js";
+import verifyToken from "./middlewares/verifyToken.js";
 import trainingRouter from "./routers/trainingRoutes.js";
-
 
 // Define constants for environment variables
 const MONGODB_URI = process.env.MONGODB_URI || ""; // MongoDB connection string
@@ -40,11 +39,9 @@ app.use("/api/trainings", trainingRouter); // Omar
 app.use("/api/emailVerification", emailVerificationRouter); // Following /api/emailVerification style
 app.use(authRouter);
 app.use(codeforcesRouter);
-
-app.use("/Applies",applicationRouter);
-app.use("/api", verifyToken , userRouter);
+app.use("/Applies", applicationRouter);
+app.use("/api/users", userRouter);
 app.use("/api/Applications", applicationRouter);
-
 
 // Default endpoint
 app.get("/", (req, res) => {
