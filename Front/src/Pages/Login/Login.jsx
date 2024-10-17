@@ -5,7 +5,29 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Link, useNavigate } from "react-router-dom";
+import axiosInstance from "../../AxiosConfig/AxiosConfig";
 export default function Login() {
+  
+  const [gmail, setGmail] = useState('');
+  const [password, setPassword] = useState('');
+  const handleLogin = async () => {
+    const loginData = {
+      gmail: gmail,
+      password: password,
+    };
+    try {
+      const response = await axiosInstance.post('api/auth/login', loginData);
+      if(response.status==="fail"){
+        //something
+      }else{
+        localStorage.setItem("token",response.data);
+        navigate("/");
+      }
+    } catch {
+      console.error('Error logging in: Login Failed');
+    }
+  };
+
   const navigate = useNavigate();
   const [logoShadow, setLogoShadow] = useState(0);
   const [emailBorderWidth, setemailBorderWidth] = useState("1px");
@@ -15,10 +37,10 @@ export default function Login() {
   const [passwordBoxShadowBlur, setpasswordBoxShadowBlur] = useState("0px");
   const [passwordBoxShadowSpread, setpasswordBoxShadowSpread] = useState("0px");
   const [logoBoxShadowBlur, setLogoBoxShadowBlur] = useState("0px");
-  const [logoDescriptiontextShadow, setLogoDescriptiontextShadow] =
-    useState("0px 0px 0px black");
+  const [logoDescriptiontextShadow, setLogoDescriptiontextShadow] = useState("0px 0px 0px black");
   const [forgetPasswordColor, setForgetPasswordColor] = useState("#dfdfdf");
   const [signUPColor, setSignUPColor] = useState("#dfdfdf");
+
   useEffect(() => {
     if (logoShadow) {
       setLogoBoxShadowBlur("40px");
@@ -28,6 +50,7 @@ export default function Login() {
       setLogoDescriptiontextShadow("0px 0px 0px black");
     }
   }, [logoShadow]);
+
   return (
     <div
       style={{
@@ -129,9 +152,12 @@ export default function Login() {
                   width: "25vw",
                   fontSize: "18px",
                 }}
+                value={gmail}
+                onChange={e => setGmail(e.target.value)}
+                required
               />
               <label htmlFor="floatingInputCustom">
-                Email address / Codeforces' handle
+                Email address / Codeforces{"'"} handle
               </label>
             </Form.Floating>
             <Form.Floating
@@ -156,6 +182,9 @@ export default function Login() {
                   width: "25vw",
                   fontSize: "18px",
                 }}
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+                required
               />
               <label htmlFor="floatingPasswordCustom">Password</label>
             </Form.Floating>
@@ -176,7 +205,6 @@ export default function Login() {
               Forget password
             </Link>
             <Button
-              type="submit"
               variant="outline-light"
               style={{
                 height: "40px",
@@ -184,6 +212,7 @@ export default function Login() {
                 fontSize: "15px",
                 marginBottom: "5px",
               }}
+              onClick={()=>handleLogin()}
             >
               Login
             </Button>

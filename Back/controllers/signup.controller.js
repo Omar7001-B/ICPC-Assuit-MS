@@ -7,6 +7,7 @@ import { generateJWT } from "../utils/generate.JWT.js";
 export const signupController = async (req, res) => {
   try {
     const userData = req.body;
+    
     // int the request body will be sent from the front end he should assien the value of the following variables  <-------
     userData.isCodeforcesVerified;
     userData.isGmailVerified;
