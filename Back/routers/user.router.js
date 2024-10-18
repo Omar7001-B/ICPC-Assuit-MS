@@ -16,10 +16,10 @@ userRouter.patch("/UserInfo", editUserInfo);
 
 userRouter.get("/", getAllUsers);
 
-userRouter.delete("/:id", deleteById);
+userRouter.delete("/:id", deleteById); // must be middleware to check that the user is admin
+ 
+userRouter.patch("/addRole/:id", addRole); // must be middleware to check that the user is admin
 
-userRouter.patch("/addRole/:id", addRole);
-
-userRouter.patch("/removeRole/:id", removeRole);
-
+userRouter.patch("/removeRole/:id", removeRole); // must be middleware to check that the user is admin
+ 
 export default userRouter;
