@@ -8,9 +8,9 @@ export default function NavbarHome() {
     <>
       <Navbar style={{ backgroundColor: "black" }} data-bs-theme="dark">
         <Container>
-          <Navbar.Brand href="#home">
+          <Navbar.Brand href="/home">
             <img
-              src="/Front/scr/"
+              src="/Front/src/assets/Images/Hussien-Ibrahim.jpg"
               alt=""
               style={{ width: "300px", height: "300px" }}
               className="d-inline-block align-top"
