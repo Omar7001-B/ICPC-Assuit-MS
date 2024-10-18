@@ -4,12 +4,12 @@ import Developers from "../../components/Developers/Developers";
 import FooterOfLandingPage from "../../components/FooterOfLandingPage/FooterOfLandingPage";
 import Founders from "../../components/Founders/Founders";
 import IntroLanding from "../../components/IntroLanding/IntroLanding";
-import NavBar from "../../components/NavBar/NavBar";
+import NavBarLanding from "../../components/NavBarLanding/NavBarLanding";
 
 export default function Landing(){
     return(
         <>
-        <NavBar/>
+        <NavBarLanding/>
         <div>
             <IntroLanding/>
             <AboutUs/>
