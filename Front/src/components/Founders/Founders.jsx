@@ -9,7 +9,6 @@ export default function Founders() {
       style={{
         height: "800px",
         padding: "70px 0px",
-        backgroundColor: "#444942",
         backgroundColor: "black"
       }}
     >

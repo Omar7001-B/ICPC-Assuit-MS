@@ -10,15 +10,14 @@ export default function NavbarHome() {
         <Container>
           <Navbar.Brand href="/home">
             <img
-              src="/Front/src/assets/Images/Hussien-Ibrahim.jpg"
+              src="/src/assets/images/Photo_Doesnot_Exsist.jpeg"
               alt=""
-              style={{ width: "300px", height: "300px" }}
-              className="d-inline-block align-top"
-            />
+              style={{ width: "40px", height: "40px", borderRadius: "50%" }}
+              className="d-inline-block align-center"
+            />{" "}
             Navbar
           </Navbar.Brand>
           <Nav style={{ paddingLeft: "0px" }}>
-            <Nav.Link href="#home">Home</Nav.Link>
             <Nav.Link
               href="/login"
               onClick={() => {
