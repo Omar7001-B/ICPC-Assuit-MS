@@ -1,5 +1,6 @@
 import dataUser from '../../models/userModel.js';
 import JWT from 'jsonwebtoken';
+import { generateJWT } from "../../utils/generate.JWT.js";
 
 export const editUserInfo = async (req, res) => {
     const authHeader = req.headers['authorization'];
@@ -29,14 +30,23 @@ export const editUserInfo = async (req, res) => {
             curUser[key] = req.body[key];
         });
 
+        const newToken  = await generateJWT({
+            firstName: curUser.firstName, 
+            lastName: curUser.lastName,
+            email: curUser.email,
+            role: curUser.role,
+            codeforcesHandle: curUser.codeforcesHandle}
+          );
+
+        curUser.token = newToken;
         await curUser.save();
 
         res.status(200).json({
             status: 'success',
             message: 'User info has been edited successfully',
             data: {
-                fName: curUser.firstName,
-                lName: curUser.lastName,
+                oldFName: curUser.firstName,
+                OldLName: curUser.lastName,
             },
         });
     } catch (error) {
