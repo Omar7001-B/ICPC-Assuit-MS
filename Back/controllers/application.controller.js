@@ -1,5 +1,7 @@
 import Application from "../models/applicationModel.js"; // Ensure .js extension
 import jwt from "jsonwebtoken";
+import User from "../models/userModel.js";
+import Training from "../models/trainingModel.js";
 
 export const applyForTraining = async (req, res) => {
   try {
@@ -53,14 +55,13 @@ export const applyForTraining = async (req, res) => {
   }
 };
 
-
 export const getTrainingApplications = async (req, res) => {
   try {
     const trainingId = req.params.id;
     console.log(trainingId);
     let applications = await Application.find({ training: trainingId });
     console.log(applications);
-    
+
     res.json({ data: applications });
   } catch (error) {
     return res.status(500).json({
@@ -76,7 +77,7 @@ export const getUserApplications = async (req, res) => {
     console.log(userId);
     let applications = await Application.find({ user: userId });
     console.log(applications);
-    
+
     res.json({ data: applications });
   } catch (error) {
     return res.status(500).json({
@@ -89,24 +90,40 @@ export const getUserApplications = async (req, res) => {
 export const changeStatus = async (req, res) => {
   try {
     const applicationId = req.body.applicationId;
+    const newstatus = req.body.status;
+    const newcomment = req.body.comment;
 
-    const newstatus=req.body.status;
-    const newcomment=req.body.comment;
-    
     let application = await Application.findById(applicationId);
     if (!application) {
-      console.log('Application not found');
+      console.log("Application not found");
       return;
     }
-    application.status=newstatus;
-    application.comments+=newcomment+'\n';
-    console.log(application);
+    if (newstatus == "accepted") {
+      let user = await User.findById(application.user);
+      let training = await Training.findById(application.training);
+
+      // Check if the training is already added to the user's trainings array
+      if (!user.trainings.includes(application.training)) {
+        user.trainings.push(application.training); // Add training to user's trainings
+        await user.save(); // Save the user document after modification
+      }
+
+      // Check if the user is already added to the training's participants array
+      if (!training.participants.includes(application.user)) {
+        training.participants.push(application.user); // Add user to training's participants
+        await training.save(); // Save the training document after modification
+      }
+      console.log("added");
+      
+    }
+    application.status = newstatus;
+    application.comments += newcomment + "\n";
     await application.save();
     res.json({ data: application });
   } catch (error) {
     return res.status(500).json({
       message: "Something went wrong. Please try again.",
-      errors: error
+      errors: error,
     });
   }
 };
