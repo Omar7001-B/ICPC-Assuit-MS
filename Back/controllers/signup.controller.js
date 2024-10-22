@@ -52,14 +52,17 @@ export const signupController = async (req, res) => {
         firstName: newUser.firstName, 
         lastName: newUser.lastName,
         email: newUser.email,
-        role: newUser.role,
+        role: newUser.roles,
         codeforcesHandle: newUser.codeforcesHandle}
       ); 
 
     newUser.token = token;
     await newUser.validate();
-    //console.log(newUser);
+
+    console.log("the user is" , newUser);
     await newUser.save();
+
+    console.log("suer rooles , " ,newUser.roles)
 
     res.status(201).json({
       status: "success",
