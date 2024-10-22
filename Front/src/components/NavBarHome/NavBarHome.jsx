@@ -1,6 +1,7 @@
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import NavDropdown from 'react-bootstrap/NavDropdown';
 import { PiSignOutFill } from "react-icons/pi";
 
 export default function NavbarHome() {
@@ -9,15 +10,37 @@ export default function NavbarHome() {
       <Navbar style={{ backgroundColor: "black" }} data-bs-theme="dark">
         <Container>
           <Navbar.Brand href="/home">
-            <img
-              src="/src/assets/images/Photo_Doesnot_Exsist.jpeg"
-              alt=""
-              style={{ width: "40px", height: "40px", borderRadius: "50%" }}
-              className="d-inline-block align-center"
-            />{" "}
-            Navbar
+            UserName
           </Navbar.Brand>
           <Nav style={{ paddingLeft: "0px" }}>
+          
+
+          <NavDropdown
+              id="nav-dropdown-dark-example"
+              title="Notifications"
+              style={{backgroundColor:"black",marginRight:"10px"}}
+            >
+              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.2">
+                Another action
+              </NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="#action/3.4">
+                Separated link
+              </NavDropdown.Item>
+            </NavDropdown>
+
+          <Nav.Link
+              href="/login"
+              onClick={() => {
+                localStorage.removeItem("token");
+              }}
+            >
+              Settings
+            </Nav.Link>
+
+
             <Nav.Link
               href="/login"
               onClick={() => {
