@@ -40,7 +40,7 @@ app.use("/api/emailVerification", emailVerificationRouter); // Following /api/em
 app.use(authRouter);
 app.use(codeforcesRouter);
 app.use("/Applies", applicationRouter);
-app.use("/api/users", userRouter);
+app.use("/api/users", verifyToken , userRouter); // do not delete the fucking verifyToken
 app.use("/api/Applications", applicationRouter);
 
 // Default endpoint
