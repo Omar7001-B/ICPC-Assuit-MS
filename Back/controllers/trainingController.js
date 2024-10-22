@@ -55,10 +55,10 @@ export const getAllTrainings = async (req, res) => {
   }
 };
 
-// Get a training by ID for admin
+// Get a training by ID for User
 export const getTrainingByIdForUser = async (req, res) => {
   try {
-    const training = await Training.findById(req.params.id)
+    const training = await Training.findById(req.params.id);
     if (!training)
       return res.status(404).json({ message: "Training not found" });
     res.status(200).json(training);
@@ -66,6 +66,7 @@ export const getTrainingByIdForUser = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
 // Get a training session by ID for admin
 export const getTrainingById = async (req, res) => {
   try {
