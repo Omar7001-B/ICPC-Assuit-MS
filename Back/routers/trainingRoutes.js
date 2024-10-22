@@ -10,20 +10,22 @@ import {
   getAllTrainingsForUser, // New route to remove participants
   getTrainingByIdForUser
 } from "../controllers/trainingController.js"; // Adjust the path based on your project structure
+import verifyToken from "../middlewares/verifyToken.js"; // Import the middleware to verify the token
+import authorizeRoles from "../middlewares/checkRole.js"; // Import the middleware to check the user's role
 
 const router = express.Router();
 
 // Routes for training sessions
-router.post("/", createTraining); // Create a new training session
-router.get("/", getAllTrainings); // Retrieve all training sessions
-router.get("/user", getAllTrainingsForUser); // //get all trainings ids that user has not apply to 
-router.get("/:id", getTrainingById); // Retrieve a specific training session by its ID
-router.get("/user/:id", getTrainingByIdForUser); // Retrieve a specific training session by its ID
-router.put("/:id", updateTraining); // Update a specific training session by its ID
-router.delete("/:id", deleteTraining); // Delete a specific training session by its ID
 
-// New routes for adding/removing participants
-router.post("/:id/participants", addParticipantsToTraining); // Add participants to a training
-router.delete("/:id/participants", removeParticipantsFromTraining); // Remove participants from a training
+router.get   ("/"                   , verifyToken , authorizeRoles("Admin") , getAllTrainings); 
+router.get   ("/:id"                , verifyToken , authorizeRoles("Admin") , getTrainingById); 
+router.post  ("/"                   , verifyToken , authorizeRoles("Admin") , createTraining); 
+router.put   ("/:id"                , verifyToken , authorizeRoles("Admin") , updateTraining); 
+router.delete("/:id"                , verifyToken , authorizeRoles("Admin") , deleteTraining); 
+router.post  ("/:id/participants"   , verifyToken , authorizeRoles("Admin") , addParticipantsToTraining); 
+router.delete("/:id/participants"   , verifyToken , authorizeRoles("Admin") , removeParticipantsFromTraining);
+
+router.get("/user/:id"              , verifyToken , authorizeRoles("User") , getTrainingByIdForUser); 
+router.get("/user"                  , verifyToken , authorizeRoles("User") , getAllTrainingsForUser); 
 
 export default router;
