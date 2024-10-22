@@ -3,13 +3,16 @@ import { applyForTraining , getTrainingApplications,changeStatus,getUserApplicat
 
 const applicationRouter = express.Router();
 
+//admin
 applicationRouter.get('/training/:id', getTrainingApplications);
 
+// user application 
 applicationRouter.get('/user/:id', getUserApplications);
+
 
 applicationRouter.post('/apply', applyForTraining);
 
 applicationRouter.post('/changeStatus', changeStatus);
-
+// if accepted add the trainingD to the user
 
 export default applicationRouter;

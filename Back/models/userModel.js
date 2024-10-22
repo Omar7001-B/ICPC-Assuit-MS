@@ -147,13 +147,11 @@ const userSchema = new mongoose.Schema({
     },
   },
 
-  roles: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Role",
-      required: [true, "Please choose a role"],
-    },
-  ],
+  roles: {
+      type: String , 
+      enum : ["User", "Admin" , "Mentor"] ,
+      default : "User"
+},
 
 
   token: {
@@ -177,6 +175,7 @@ const userSchema = new mongoose.Schema({
 
 
 });
+
 
 mongoose.model("User", userSchema);
 export default mongoose.model("User");

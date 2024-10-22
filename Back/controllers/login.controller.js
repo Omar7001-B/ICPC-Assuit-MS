@@ -22,8 +22,6 @@ export const loginController = async (req, res) => {
             data: null,
         });
     }
-    console.log(inUser);
-    console.log(userData);
     
     const ismatch = await bcrypt.compare(userData.password, inUser.password);
     
@@ -32,12 +30,14 @@ export const loginController = async (req, res) => {
             firstName: inUser.firstName,
             lastName: inUser.lastName,
             email: inUser.email,
-            role: inUser.role,
+            role: inUser.roles,
             codeforcesHandle: inUser.codeforcesHandle ,
             id : inUser._id
         });
         inUser.token = token;
+        console.log("user roles ",inUser.roles);
         inUser.save();
+
 
         return res.status(200).json({
             status: "success",
