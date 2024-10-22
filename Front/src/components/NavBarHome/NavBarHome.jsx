@@ -7,9 +7,9 @@ import { PiSignOutFill } from "react-icons/pi";
 export default function NavbarHome() {
   return (
     <>
-      <Navbar style={{ backgroundColor: "black" }} data-bs-theme="dark">
+      <Navbar style={{ backgroundColor: "black" ,height:"10vh",marginBottom:"5px"}} data-bs-theme="dark">
         <Container>
-          <Navbar.Brand href="/home">
+          <Navbar.Brand href="/home" style={{fontSize:"25px",color:"#dfdfdf"}}>
             UserName
           </Navbar.Brand>
           <Nav style={{ paddingLeft: "0px" }}>

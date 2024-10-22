@@ -11,7 +11,7 @@ export default function Home() {
       <NavBarHome />
       <Container style={{margin:"0px"}}>
         <Row>
-          <Col xs={3}>
+          <Col xs={3} style={{padding:"0px"}}>
           <SideBarHome/>
           </Col>
           <Col xs={9}>
