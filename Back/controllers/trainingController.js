@@ -11,6 +11,8 @@ export const createTraining = async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 };
+// API to get all traingins ID that user not in return array of ids
+// API return training based on ID 
 
 // Get all training sessions
 export const getAllTrainings = async (req, res) => {
@@ -24,7 +26,7 @@ export const getAllTrainings = async (req, res) => {
   }
 };
 
-// Get a training session by ID
+// Get a training session by ID // for admin
 export const getTrainingById = async (req, res) => {
   try {
     const training = await Training.findById(req.params.id)
