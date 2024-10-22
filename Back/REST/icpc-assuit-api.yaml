@@ -1,0 +1,316 @@
+openapi: 3.0.0
+info:
+  title: ICPC Assuit MS API
+  version: 1.0.0
+paths:
+  /api/emailVerification:
+    post:
+      summary: Send Verification Email
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: benjami4n@gmail.com
+      responses:
+        '200':
+          description: Verification email sent successfully
+        '400':
+          description: Invalid email format
+
+  /api/signup:
+    post:
+      summary: Sign Up with Complete User Profile
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                firstName:
+                  type: string
+                  example: John
+                lastName:
+                  type: string
+                  example: Doe
+                phone:
+                  type: string
+                  example: 01234567891
+                nationalID:
+                  type: string
+                  example: 12345678901234
+                government:
+                  type: string
+                  example: ""
+                city:
+                  type: string
+                  example: Cairo
+                facebook:
+                  type: string
+                  format: uri
+                  example: https://facebook.com/johndoe
+                university:
+                  type: string
+                  example: Cairo University
+                faculty:
+                  type: string
+                  example: Computer Science
+                level:
+                  type: string
+                  example: ""
+                academicEmail:
+                  type: string
+                  example: ""
+                gmail:
+                  type: string
+                  format: email
+                  example: joh2n.doe@example.com
+                password:
+                  type: string
+                  example: "$2b$10$khUFiTrBZm5IHEnYVHFUquMUdz9qlITjy6.WpUWRziAzUpgdgVTcm"
+                codeforcesHandle:
+                  type: string
+                  example: JohnDoe123
+                virtualJudgeHandle:
+                  type: string
+                  example: JDoeVJ
+                roles:
+                  type: array
+                  items:
+                    type: string
+                    example: "651e3a546fb35a0014a8cd10"
+                trainings:
+                  type: array
+                  items:
+                    type: string
+                    example: "651e3a546fb35a0014a8cd10"
+                logs:
+                  type: array
+                  items:
+                    type: string
+                isGmailVerified:
+                  type: boolean
+                  example: true
+                isCodeforcesVerified:
+                  type: boolean
+                  example: false
+      responses:
+        '201':
+          description: User signed up successfully
+        '400':
+          description: Invalid input
+
+  /api/trainings:
+    post:
+      summary: Create a New Training Session
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  example: Introduction to Node.js
+                level:
+                  type: string
+                  example: newcomer
+                session:
+                  type: string
+                  example: fall
+                audience:
+                  type: array
+                  items:
+                    type: string
+                    example: developers
+                start:
+                  type: string
+                  format: date-time
+                  example: "2024-11-01T10:00:00Z"
+                method:
+                  type: string
+                  example: online
+                location:
+                  type: string
+                  example: Online Platform
+                requirements:
+                  type: array
+                  items:
+                    type: string
+                    example: Laptop
+                deadline:
+                  type: string
+                  format: date-time
+                  example: "2024-10-25T23:59:59Z"
+      responses:
+        '201':
+          description: Training session created successfully
+        '400':
+          description: Invalid input
+
+    get:
+      summary: Retrieve All Training Sessions
+      responses:
+        '200':
+          description: List of training sessions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+
+  /api/trainings/{trainingId}:
+    get:
+      summary: Retrieve a Specific Training Session by ID
+      parameters:
+        - name: trainingId
+          in: path
+          required: true
+          description: ID of the training session
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Training session details
+        '404':
+          description: Training session not found
+
+    put:
+      summary: Update a Specific Training Session by ID
+      parameters:
+        - name: trainingId
+          in: path
+          required: true
+          description: ID of the training session
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  example: Phase1 First Term Training 2024
+                level:
+                  type: string
+                  example: phase1
+                session:
+                  type: string
+                  example: spring
+                audience:
+                  type: array
+                  items:
+                    type: string
+                    example: experienced developers
+                start:
+                  type: string
+                  format: date-time
+                  example: "2024-10-01T10:00:00Z"
+                method:
+                  type: string
+                  example: hybrid
+                location:
+                  type: string
+                  example: Hybrid Platform
+                requirements:
+                  type: array
+                  items:
+                    type: string
+                    example: Laptop
+                deadline:
+                  type: string
+                  format: date-time
+                  example: "2025-01-20T23:59:59Z"
+      responses:
+        '200':
+          description: Training session updated successfully
+        '404':
+          description: Training session not found
+
+    delete:
+      summary: Delete a Specific Training Session by ID
+      parameters:
+        - name: trainingId
+          in: path
+          required: true
+          description: ID of the training session
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Training session deleted successfully
+        '404':
+          description: Training session not found
+
+  /api/trainings/{trainingId}/participants:
+    post:
+      summary: Add Participants to a Training
+      parameters:
+        - name: trainingId
+          in: path
+          required: true
+          description: ID of the training session
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                participants:
+                  type: array
+                  items:
+                    type: string
+                    example: participantId1
+      responses:
+        '200':
+          description: Participants added successfully
+        '404':
+          description: Training session not found
+
+    delete:
+      summary: Remove Participants from a Training
+      parameters:
+        - name: trainingId
+          in: path
+          required: true
+          description: ID of the training session
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Participants removed successfully
+        '404':
+          description: Training session not found
+
+  /api/checkCode:
+    post:
+      summary: Check Verification Code
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: string
+                  example: "87186"
+      responses:
+        '200':
+          description: Verification code is valid
+        '400':
+          description: Invalid verification code
