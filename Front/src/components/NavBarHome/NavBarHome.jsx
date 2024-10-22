@@ -32,7 +32,7 @@ export default function NavbarHome() {
             </NavDropdown>
 
           <Nav.Link
-              href="/login"
+              href="/settings"
               onClick={() => {
                 localStorage.removeItem("token");
               }}
