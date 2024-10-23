@@ -12,12 +12,19 @@ export const getAllUsers = async (req, res) => {
 
 // Delete User
 export const deleteById = async (req, res) => {
-  let id = req.params.id;
+  let id = req.headers.id;
+  if (!id)
+  {
+    return res.status(500).json({
+      message: "Something went wrong. Please try again.",
+      errors: error,
+    });
+  }
   let deleteOne = await User.findByIdAndDelete(id);
   if (deleteOne) {
     res.json({ message: "successfully deleted" });
   } else {
-    res.json({ message: "faield" });
+    res.json({ message: "faild" });
   }
 };
 
