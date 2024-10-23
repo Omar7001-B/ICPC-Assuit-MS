@@ -25,16 +25,16 @@ app.use(cors());
 // app.use("/trainings");
 // app.use("/users");
 // app.use("/history");
-app.use("/role", roleRouter);
 
 // Connect to MongoDB using the connection string from the .env file
 mongoose
-  .connect(MONGODB_URI)
-  .then(() => console.log("MongoDB connected"))
-  .catch((err) => console.error("MongoDB connection error:", err));
+.connect(MONGODB_URI)
+.then(() => console.log("MongoDB connected"))
+.catch((err) => console.error("MongoDB connection error:", err));
 
 // Routes
 
+app.use("/role", roleRouter);
 app.use("/api/trainings", trainingRouter); // Omar
 app.use("/api/emailVerification", emailVerificationRouter); // Following /api/emailVerification style
 app.use(authRouter);
