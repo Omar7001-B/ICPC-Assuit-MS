@@ -8,7 +8,7 @@ export default function SideBarHomeNavLink({about,linkto,shadowColor,setShadowCo
         style={{
           textDecoration: "none",
           color: "#dfdfdf",
-          textShadow: `20px 20px 10px ${shadowColor},-20px 20px 10px ${shadowColor},20px -20px 10px ${shadowColor},-20px -20px 10px ${shadowColor}`,
+          textShadow: `20px 20px 15px ${shadowColor},-20px 20px 15px ${shadowColor},20px -20px 15px ${shadowColor},-20px -20px 15px ${shadowColor}`,
         }}
         onPointerEnter={() => {
             setShadowColor("red");

@@ -18,6 +18,7 @@ export default function SideBarHome() {
         flexDirection: "column",
         padding: "35px",
         fontSize: "25px",
+         boxShadow:"inset 0px 40px 70px -70px red,inset -65px 0px 30px -80px red"
       }}
     >
       <SideBarHomeNavLink
