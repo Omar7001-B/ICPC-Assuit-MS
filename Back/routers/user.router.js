@@ -18,7 +18,7 @@ userRouter.patch("/UserInfo"  , verifyToken  ,  editUserInfo);
 
 
 userRouter.get   ("/"   , verifyToken , authorizeRoles("Admin") , getAllUsers); // admin only
-userRouter.delete("/:id", verifyToken , authorizeRoles("Admin") , deleteById ) ; // must be middleware to check that the user is admin
+userRouter.delete("/", verifyToken , authorizeRoles("Admin") , deleteById ) ; // must be middleware to check that the user is admin
  
 // we will add role manually 
 //userRouter.patch("/addRole/:id", addRole); // must be middleware to check that the user is admin

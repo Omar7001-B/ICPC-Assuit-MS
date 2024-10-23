@@ -6,7 +6,14 @@ export const getAll = async (req, res) => {
 };
 
 export const edit = async (req, res) => {
-  let id = req.params.id;
+  let id = req.headers.id;
+  if (!id)
+  {
+    return res.status(500).json({
+      message: "Something went wrong. Please try again.",
+      errors: error,
+    });
+  }
   let body = req.body;
   let editOne = await Role.findByIdAndUpdate(
     id,
@@ -24,7 +31,14 @@ export const edit = async (req, res) => {
 };
 
 export const getById = async (req, res) => {
-  let id = req.params.id;
+  let id = req.headers.id;
+  if (!id)
+  {
+    return res.status(500).json({
+      message: "Something went wrong. Please try again.",
+      errors: error,
+    });
+  }
   try {
     let role = await Role.find({ _id: id });
     res.json({ data: role });
@@ -44,7 +58,14 @@ export const create = async (req, res) => {
 };
 
 export const deleteById = async (req, res) => {
-  let id = req.params.id;
+  let id = req.headers.id;
+  if (!id)
+  {
+    return res.status(500).json({
+      message: "Something went wrong. Please try again.",
+      errors: error,
+    });
+  }
   let deleteOne = await Role.findByIdAndDelete(id);
   if (deleteOne) {
     res.json({ message: "successfully deleted", data: await Role.find() });
@@ -54,7 +75,14 @@ export const deleteById = async (req, res) => {
 };
 
 export const replace = async (req, res) => {
-  let id = req.params.id;
+  let id = req.headers.id;
+  if (!id)
+  {
+    return res.status(500).json({
+      message: "Something went wrong. Please try again.",
+      errors: error,
+    });
+  }
   let body = req.body;
   let replaceOne = await Role.findOneAndReplace({ _id: id }, body, {
     new: true,

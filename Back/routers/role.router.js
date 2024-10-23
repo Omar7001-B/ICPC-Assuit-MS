@@ -3,12 +3,12 @@ import { getAll, edit, getById, create, deleteById, replace } from '../controlle
 
 const roleRrouter = express.Router();
 
-roleRrouter.get("/", getAll);
-roleRrouter.patch("/:id", edit);
-roleRrouter.get("/:id", getById);
+roleRrouter.get("/all/", getAll);
+roleRrouter.patch("/", edit);
+roleRrouter.get("/", getById);
 roleRrouter.post("/", create);
-roleRrouter.delete("/:id", deleteById);
-roleRrouter.put("/:id", replace);
+roleRrouter.delete("/", deleteById);
+roleRrouter.put("/", replace);
 
 export default roleRrouter;
 

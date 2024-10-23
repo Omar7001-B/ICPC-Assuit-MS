@@ -57,7 +57,12 @@ export const applyForTraining = async (req, res) => {
 
 export const getTrainingApplications = async (req, res) => {
   try {
-    const trainingId = req.params.id;
+    const trainingId = req.headers.id;
+    if (!trainingId)
+      return res.status(500).json({ 
+    message: "Something went wrong. please try again",
+    errors :error, 
+  });
     console.log(trainingId);
     let applications = await Application.find({ training: trainingId });
     console.log(applications);
@@ -73,7 +78,14 @@ export const getTrainingApplications = async (req, res) => {
 
 export const getUserApplications = async (req, res) => {
   try {
-    const userId = req.params.id;
+    const userId = req.headers.id;
+    if (!userId)
+    {
+      return res.status(500).json({
+      message: "Something went wrong. Please try again.",
+      errors: error,
+    });
+    }
     console.log(userId);
     let applications = await Application.find({ user: userId });
     console.log(applications);

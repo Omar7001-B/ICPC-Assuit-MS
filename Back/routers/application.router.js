@@ -7,9 +7,9 @@ import authorizeRoles from '../middlewares/checkRole.js';
 const applicationRouter = express.Router();
 
 //admin
-applicationRouter.get('/training/:id', verifyToken , authorizeRoles("Admin")  , getTrainingApplications);
+applicationRouter.get('/training', verifyToken , authorizeRoles("Admin")  , getTrainingApplications);
 // user application 
-applicationRouter.get('/user/:id', getUserApplications);
+applicationRouter.get('/user', getUserApplications);
 applicationRouter.post('/apply', applyForTraining);
 applicationRouter.post('/changeStatus', changeStatus);
 // if accepted add the trainingD to the user

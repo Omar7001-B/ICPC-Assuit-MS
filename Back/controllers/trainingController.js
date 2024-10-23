@@ -60,8 +60,16 @@ export const getAllTrainings = async (req, res) => {
 
 // Get a training by ID for User
 export const getTrainingByIdForUser = async (req, res) => {
+  let id=req.headers.id
+  if (!id)
+  {
+    return res.status(500).json({
+      message: "Something went wrong. Please try again.",
+      errors: error,
+    });
+  }
   try {
-    const training = await Training.findById(req.params.id);
+    const training = await Training.findById(req.headers.id);
     if (!training)
       return res.status(404).json({ message: "Training not found" });
     res.status(200).json(training);
@@ -73,8 +81,16 @@ export const getTrainingByIdForUser = async (req, res) => {
 // Get a training session by ID for admin
 
 export const getTrainingById = async (req, res) => {
+  let id=req.headers.id
+  if (!id)
+  {
+    return res.status(500).json({
+      message: "Something went wrong. Please try again.",
+      errors: error,
+    });
+  }
   try {
-    const training = await Training.findById(req.params.id)
+    const training = await Training.findById(req.headers.id)
       .populate("participants")
       .populate("logs");
     if (!training)
@@ -87,8 +103,16 @@ export const getTrainingById = async (req, res) => {
 
 // Update a training session
 export const updateTraining = async (req, res) => {
+  let id =req.headers.id
+  if (!id)
+  {
+    return res.status(500).json({
+      message: "Something went wrong. Please try again.",
+      errors: error,
+    });
+  }
   try {
-    const training = await Training.findByIdAndUpdate(req.params.id, req.body, {
+    const training = await Training.findByIdAndUpdate(req.headers.id, req.body, {
       new: true,
       runValidators: true,
     });
@@ -102,8 +126,16 @@ export const updateTraining = async (req, res) => {
 
 // Delete a training session
 export const deleteTraining = async (req, res) => {
+  let id=req.headers.id
+  if (!id)
+  {
+    return res.status(500).json({
+      message: "Something went wrong. Please try again.",
+      errors: error,
+    });
+  }
   try {
-    const training = await Training.findByIdAndDelete(req.params.id);
+    const training = await Training.findByIdAndDelete(req.headers.id);
     if (!training)
       return res.status(404).json({ message: "Training not found" });
     res.status(204).send();
@@ -115,9 +147,16 @@ export const deleteTraining = async (req, res) => {
 // Add participants to a training session
 export const addParticipantsToTraining = async (req, res) => {
   const { participants } = req.body; // Expecting an array of participant IDs
-
+  let id=req.headers.id
+  if (!id)
+  {
+    return res.status(500).json({
+      message: "Something went wrong. Please try again.",
+      errors: error,
+    });
+  }
   try {
-    const training = await Training.findById(req.params.id);
+    const training = await Training.findById(req.headers.id);
     if (!training)
       return res.status(404).json({ message: "Training not found" });
 
@@ -136,9 +175,16 @@ export const addParticipantsToTraining = async (req, res) => {
 // Remove participants from a training session
 export const removeParticipantsFromTraining = async (req, res) => {
   const { participants } = req.body; // Expecting an array of participant IDs
-
+  let id=req.headers.id
+  if (!id)
+  {
+    return res.status(500).json({
+      message: "Something went wrong. Please try again.",
+      errors: error,
+    });
+  }
   try {
-    const training = await Training.findById(req.params.id);
+    const training = await Training.findById(req.headers.id);
     if (!training)
       return res.status(404).json({ message: "Training not found" });
 
