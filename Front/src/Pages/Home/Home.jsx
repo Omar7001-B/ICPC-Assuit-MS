@@ -19,7 +19,7 @@ export default function Home() {
         color: "#dfdfdf",
         backgroundColor: "black",
         width: "77.4vw",
-        height: "100vh",
+        minHeight: "100vh",
         boxShadow:"-5px 0px 70px 0px red,inset 60px 0px 70px -60px red"}}>
           <Outlet/>
           </div>

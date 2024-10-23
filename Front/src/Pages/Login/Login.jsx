@@ -20,7 +20,7 @@ export default function Login() {
       if(response.status==="fail"){
         setErrorMessage(1);
       }else{
-        localStorage.setItem("token",response.data);
+        localStorage.setItem("token",response.data.data);
         setErrorMessage(0);
         navigate("/home");
       }
