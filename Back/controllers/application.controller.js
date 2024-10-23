@@ -71,6 +71,8 @@ export const getTrainingApplications = async (req, res) => {
   }
 };
 
+
+//
 export const getUserApplications = async (req, res) => {
   try {
     const userId = req.params.id;
