@@ -78,7 +78,20 @@ export const getTrainingApplications = async (req, res) => {
 
 export const getUserApplications = async (req, res) => {
   try {
-    const userId = req.headers.id;
+    const authHeader =
+      req.headers["authorization"] || req.headers["Authorization"];
+    if (!authHeader)
+      return res.status(401).json({ message: "No token provided" });
+    const token = authHeader.split(" ")[1];
+    console.log(token);
+    let userId;
+    try {
+      const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+      console.log(decodedToken);
+      userId = decodedToken.id;
+    } catch (err) {
+      return res.status(403).json({ message: "Unauthorized" });
+    }
     if (!userId)
     {
       return res.status(500).json({
@@ -87,9 +100,8 @@ export const getUserApplications = async (req, res) => {
     });
     }
     console.log(userId);
-    let applications = await Application.find({ user: userId });
+    let applications = await Application.find({ user: userId }).populate("training","title level requirements deadline start" );
     console.log(applications);
-
     res.json({ data: applications });
   } catch (error) {
     return res.status(500).json({
