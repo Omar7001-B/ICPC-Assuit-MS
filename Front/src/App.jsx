@@ -9,10 +9,12 @@ import StatisticsHome from "./components/StatisticsHome/StatisticsHome";
 import ApplicationsHome from "./components/ApplicationsHome/ApplicationsHome";
 import MaterialsHome from "./components/MaterialsHome/MaterialsHome";
 import HistoryHome from "./components/HistoryHome/HistoryHome";
+import Settings from "./Pages/Settings/Settings";
 const routes = createBrowserRouter([
   { index: true, element: <Landing /> },
   { path: "/login", element: <Login /> },
   { path: "/signup", element: <SignUp /> },
+  { path: "/settings", element: <Settings /> },
   {
     path: "/home",
     element: <Home />,
