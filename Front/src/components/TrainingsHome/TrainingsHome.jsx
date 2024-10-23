@@ -2,61 +2,89 @@ import { useEffect, useState } from "react";
 import axiosInstance from "../../AxiosConfig/AxiosConfig";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+
 export default function TrainingsHome() {
-  const [oneTraining, setOneTraining] = useState({});
   const [trainingsId, setTrainingsId] = useState([]);
+  const [loadedTrainings, setLoadedTrainings] = useState([]); 
+
   const getTrainings = async () => {
     try {
-      const response = await axiosInstance.get("/user");
-      setTrainingsId(response);
+      const response = await axiosInstance.get("/api/trainings/user/all");
+      setTrainingsId(response.data);
     } catch (error) {
       console.log("There is Error: " + error.message);
     }
   };
+
   const getOneTraining = async (id) => {
     try {
-      const response = await axiosInstance.get(`/user/${id}`);
-      setOneTraining(response);
+      const response = await axiosInstance.get(`/api/trainings/user/`, {
+        headers: {
+          id: id,
+        },
+      });
+      return response.data;
     } catch (error) {
-      console.log(error.message);
+      console.log("LOL", error.message);
     }
   };
+
   useEffect(() => {
     getTrainings();
   }, []);
+
+  useEffect(() => {
+    const fetchTrainings = async () => {
+      const loadedData = await Promise.all(
+        trainingsId.map(async (id) => {
+          const training = await getOneTraining(id);
+          return training;
+        })
+      );
+      setLoadedTrainings(loadedData);
+    };
+
+    if (trainingsId.length > 0) {
+      fetchTrainings();
+    }
+  }, [trainingsId]);
+
   return (
     <div
       style={{
+        padding:"25px",
         display: "flex",
-        justifyContent: "center",
+        flexFlow:"row wrap",
+        justifyContent:"space-around",
         alignItems: "center",
         width: "77.4vw",
-        height: "100vh",
+        minHeight: "100vh",
       }}
     >
-      {trainingsId.length > 0
-        ? trainingsId.map((id) => {
-            setOneTraining("");
-            getOneTraining(id);
+      {loadedTrainings.length > 0
+        ? loadedTrainings.map((training) => {
             const date = new Date();
-            if (oneTraining !== "" && date <= oneTraining.deadline) {
-              <Card style={{ width: "18rem" }}>
-                <Card.Img
-                  variant="top"
-                  src="/Front/src/assets/Images/ICPC-Logo.png"
-                />
-                <Card.Body>
-                  <Card.Title>{oneTraining.title}</Card.Title>
-                  <Card.Title>{oneTraining.level}</Card.Title>
-                  <Card.Text>
-                    requirements: {oneTraining.requirements.join(" || ")}
-                  </Card.Text>
-                  <Button variant="primary">Apply</Button>
-                </Card.Body>
-              </Card>;
+            if (training && date <= new Date(training.deadline)) {
+              return (
+                <Card key={training.id} style={{ width: "20rem" ,height:"30vh",backgroundColor:"#dfdfdf"}}>
+                  <Card.Body>
+                    <Card.Title style={{height:"5vh"}}>{training.title}</Card.Title>
+                    <Card.Title>{training.level}</Card.Title>
+                    <Card.Text style={{height:"8vh",color:"#ca5757"}}>
+                      Requirements: {training.requirements.join(" || ")}
+                    </Card.Text>
+                    <Button variant="outline-success" 
+                    onClick={()=>{
+
+                    }}
+                    >Apply</Button>
+                  </Card.Body>
+                </Card>
+              );
             }
+            return null;
           })
-        : "No Training Avaliable"}
+        : `No Training Available`}
     </div>
   );
 }
