@@ -59,10 +59,10 @@ export const signupController = async (req, res) => {
     newUser.token = token;
     await newUser.validate();
 
-    console.log("the user is" , newUser);
+    //console.log("the user is --------------------" , newUser);
     await newUser.save();
 
-    console.log("suer rooles , " ,newUser.roles)
+    console.log("sssssuer rooles , " ,newUser.roles)
 
     res.status(201).json({
       status: "success",
@@ -86,7 +86,8 @@ export const signupController = async (req, res) => {
     res.status(500).json({
       status: "error",
       message: "An unexpected error occurred",
-      data: null,
+      data: error,
+
     });
   }
 };
