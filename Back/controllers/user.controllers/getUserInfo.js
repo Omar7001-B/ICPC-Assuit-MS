@@ -17,9 +17,12 @@ export const getUserInfo = async (req, res) => {
                 lName : curUser.lastName , 
                 email : curUser.gmail,
                 phone : curUser.phone, 
+                university : curUser.university, 
+                level : curUser.level,
+                faculty : curUser.faculty,
                 codeforces : curUser.codeforcesHandle,
                 vjHandle : curUser.vjudgeHandle,
-                image : "imgage" 
+                image : "image" 
             }
           });
     } catch{
