@@ -5,7 +5,7 @@ import Card from "react-bootstrap/Card";
 
 export default function TrainingsHome() {
   const [trainingsId, setTrainingsId] = useState([]);
-  const [loadedTrainings, setLoadedTrainings] = useState([]); 
+  const [loadedTrainings, setLoadedTrainings] = useState([]);
 
   const getTrainings = async () => {
     try {
@@ -25,10 +25,20 @@ export default function TrainingsHome() {
       });
       return response.data;
     } catch (error) {
-      console.log("LOL", error.message);
+      console.log("There is Error: ", error.message);
     }
   };
-
+  const applyTraining= async (id)=>{
+    try{
+      const training={
+        trainingId:id
+      }
+      // eslint-disable-next-line no-unused-vars
+      const response= await axiosInstance.post("/api/Applications/apply",training);
+    }catch(error){
+      console.log("There is Error: ", error.message);
+    }
+  }
   useEffect(() => {
     getTrainings();
   }, []);
@@ -75,7 +85,8 @@ export default function TrainingsHome() {
                     </Card.Text>
                     <Button variant="outline-success" 
                     onClick={()=>{
-
+                      applyTraining(training._id);
+                      window.location.reload();
                     }}
                     >Apply</Button>
                   </Card.Body>
