@@ -176,39 +176,41 @@ export const addParticipantsToTraining = async (req, res) => {
 
 // Remove participant from a training session
 export const removeParticipantFromTraining = async (req, res) => {
-  const { participantId } = req.body; // Expecting a single participant ID
-  let id = req.headers.id;
-
-  if (!id) {
+  let id = req.headers["id"];
+  let participantId = req.headers["participantid"];
+  console.log(req.headers);
+  if (!id||!participantId) {
     return res.status(500).json({
       message: "Something went wrong. Please try again.",
       errors: error,
     });
   }
 
-  try {
-    const training = await Training.findById(id);
-    const user = await User.findById(participantId);
-    if (!training) {
-      return res.status(404).json({ message: "Training not found" });
-    }
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
-    // Remove the specific participant if they exist
-    training.participants = training.participants.filter(
-      (existingParticipantId) =>
-        existingParticipantId.toString() !== participantId
-    );
-
-    user.trainings = user.trainings.filter(
-      (existingTrainingId) => existingTrainingId.toString() !== id
-    );
-
-    await training.save();
-    await user.save();
-    res.status(200).json({ message: "Participant removed", training });
-  } catch (error) {
+try {
+  const training = await Training.findById(id);
+  const user = await User.findById(participantId);
+  if (!training) {
+    return res.status(404).json({ message: "Training not found" });
+  }
+  if (!user) {
+    return res.status(404).json({ message: "User not found" });
+  }
+  // Remove the specific participant if they exist
+  training.participants = training.participants.filter(
+    (existingParticipantId) =>
+      existingParticipantId.toString() !== participantId
+  );
+  
+  console.log(participantId+" 2 "+id);
+  user.trainings = user.trainings.filter(
+    (existingTrainingId) => existingTrainingId.toString() !== id
+  );
+  
+  await training.save();
+  console.log(participantId+" 3 "+id);
+  await user.save();
+  res.status(200).json({ message: "Participant removed", training });
+} catch (error) {
     res.status(500).json({ message: error.message });
   }
 };

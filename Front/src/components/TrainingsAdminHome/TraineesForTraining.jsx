@@ -21,11 +21,16 @@ export default function TraineesForTraining() {
   };
   const filterTrainee=async(_id)=>{
     try{
-      const response = await axiosInstance.delete("/api/trainings/participants", {
+      console.log(_id+" "+id);
+      
+      // eslint-disable-next-line no-unused-vars
+      const response = await axiosInstance.delete("/api/trainings/participant",{
         headers: {
           id: id,
+          participantid: _id,
         },
-    },_id);
+    });
+    window.location.reload();
      }catch(error){
       console.log("There is Error: ", error.message);
     }
@@ -58,7 +63,7 @@ export default function TraineesForTraining() {
                 <td style={{ textAlign: "center" }}>
                   <Button variant="outline-danger" style={{ width: "60%" }}
                   onClick={()=>{
-                    filterTrainee(user_id);
+                    filterTrainee(user._id);
                   }}>
                     Filter
                   </Button>

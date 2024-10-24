@@ -25,7 +25,7 @@ export default function ApplicationsForTrainings() {
   }, []);
   return (
     <div style={{ padding: "50px" }}>
-      <Table striped bordered hover>
+      <Table striped bordered hover variant="dark">
         <thead>
           <tr>
             <th>#</th>
