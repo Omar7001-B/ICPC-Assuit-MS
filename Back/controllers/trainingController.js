@@ -1,7 +1,8 @@
 import Training from "../models/trainingModel.js";
+import User from "../models/userModel.js";
 import Log from "../models/logModel.js";
-import Application from '../models/applicationModel.js';
-import jwt from 'jsonwebtoken';
+import Application from "../models/applicationModel.js";
+import jwt from "jsonwebtoken";
 // Create a new training session
 export const createTraining = async (req, res) => {
   try {
@@ -13,9 +14,9 @@ export const createTraining = async (req, res) => {
   }
 };
 // API to get all traingins ID that user not in return array of ids
-// API return training based on ID 
+// API return training based on ID
 
-//get all trainings ids that user has not apply to 
+//get all trainings ids that user has not apply to
 export const getAllTrainingsForUser = async (req, res) => {
   try {
     const authHeader =
@@ -33,13 +34,16 @@ export const getAllTrainingsForUser = async (req, res) => {
       return res.status(403).json({ message: "Unauthorized" });
     }
     // trainings id that user has apply to it
-    const userApplications=await Application.find({ user: userId },'training');
-    const idsUser=userApplications.map(doc=>doc.training.toString());
+    const userApplications = await Application.find(
+      { user: userId },
+      "training"
+    );
+    const idsUser = userApplications.map((doc) => doc.training.toString());
     // all trainings id
-    const trainings = await Training.find({},'_id');
-    const ids=trainings.map(doc=>doc._id.toString());
-    // trainings id of trainings that user hasn't apply 
-    const filteredIds = ids.filter(id => !idsUser.includes(id));
+    const trainings = await Training.find({}, "_id");
+    const ids = trainings.map((doc) => doc._id.toString());
+    // trainings id of trainings that user hasn't apply
+    const filteredIds = ids.filter((id) => !idsUser.includes(id));
     res.status(200).json(filteredIds);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -57,12 +61,10 @@ export const getAllTrainings = async (req, res) => {
   }
 };
 
-
 // Get a training by ID for User
 export const getTrainingByIdForUser = async (req, res) => {
-  let id=req.headers.id
-  if (!id)
-  {
+  let id = req.headers.id;
+  if (!id) {
     return res.status(500).json({
       message: "Something went wrong. Please try again.",
       errors: error,
@@ -81,9 +83,8 @@ export const getTrainingByIdForUser = async (req, res) => {
 // Get a training session by ID for admin
 
 export const getTrainingById = async (req, res) => {
-  let id=req.headers.id
-  if (!id)
-  {
+  let id = req.headers.id;
+  if (!id) {
     return res.status(500).json({
       message: "Something went wrong. Please try again.",
       errors: error,
@@ -103,19 +104,22 @@ export const getTrainingById = async (req, res) => {
 
 // Update a training session
 export const updateTraining = async (req, res) => {
-  let id =req.headers.id
-  if (!id)
-  {
+  let id = req.headers.id;
+  if (!id) {
     return res.status(500).json({
       message: "Something went wrong. Please try again.",
       errors: error,
     });
   }
   try {
-    const training = await Training.findByIdAndUpdate(req.headers.id, req.body, {
-      new: true,
-      runValidators: true,
-    });
+    const training = await Training.findByIdAndUpdate(
+      req.headers.id,
+      req.body,
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
     if (!training)
       return res.status(404).json({ message: "Training not found" });
     res.status(200).json(training);
@@ -126,9 +130,8 @@ export const updateTraining = async (req, res) => {
 
 // Delete a training session
 export const deleteTraining = async (req, res) => {
-  let id=req.headers.id
-  if (!id)
-  {
+  let id = req.headers.id;
+  if (!id) {
     return res.status(500).json({
       message: "Something went wrong. Please try again.",
       errors: error,
@@ -147,9 +150,8 @@ export const deleteTraining = async (req, res) => {
 // Add participants to a training session
 export const addParticipantsToTraining = async (req, res) => {
   const { participants } = req.body; // Expecting an array of participant IDs
-  let id=req.headers.id
-  if (!id)
-  {
+  let id = req.headers.id;
+  if (!id) {
     return res.status(500).json({
       message: "Something went wrong. Please try again.",
       errors: error,
@@ -172,29 +174,40 @@ export const addParticipantsToTraining = async (req, res) => {
   }
 };
 
-// Remove participants from a training session
-export const removeParticipantsFromTraining = async (req, res) => {
-  const { participants } = req.body; // Expecting an array of participant IDs
-  let id=req.headers.id
-  if (!id)
-  {
+// Remove participant from a training session
+export const removeParticipantFromTraining = async (req, res) => {
+  const { participantId } = req.body; // Expecting a single participant ID
+  let id = req.headers.id;
+
+  if (!id) {
     return res.status(500).json({
       message: "Something went wrong. Please try again.",
       errors: error,
     });
   }
+
   try {
-    const training = await Training.findById(req.headers.id);
-    if (!training)
+    const training = await Training.findById(id);
+    const user = await User.findById(participantId);
+    if (!training) {
       return res.status(404).json({ message: "Training not found" });
-
-    // Remove participants by filtering out the given IDs
+    }
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    // Remove the specific participant if they exist
     training.participants = training.participants.filter(
-      (participantId) => !participants.includes(participantId.toString())
+      (existingParticipantId) =>
+        existingParticipantId.toString() !== participantId
     );
-    await training.save();
 
-    res.status(200).json({ message: "Participants removed", training });
+    user.trainings = user.trainings.filter(
+      (existingTrainingId) => existingTrainingId.toString() !== id
+    );
+
+    await training.save();
+    await user.save();
+    res.status(200).json({ message: "Participant removed", training });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
