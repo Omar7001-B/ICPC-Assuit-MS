@@ -68,7 +68,6 @@ const userSchema = new mongoose.Schema({
 
   facebook: {
     type: String,
-    unique: true,
     default: null,
   },
 
