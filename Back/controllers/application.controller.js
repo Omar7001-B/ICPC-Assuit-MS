@@ -64,7 +64,7 @@ export const getTrainingApplications = async (req, res) => {
     errors :error, 
   });
     console.log(trainingId);
-    let applications = await Application.find({ training: trainingId });
+    let applications = await Application.find({ training: trainingId }).populate("user","firstName lastName level university faculty");
     console.log(applications);
 
     res.json({ data: applications });
