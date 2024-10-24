@@ -22,7 +22,9 @@ export default function Login() {
       }else{
         localStorage.setItem("token",response.data.data);
         setErrorMessage(0);
-        navigate("/home");
+        if(response.data.role=="User")navigate("/home");
+        else navigate("/adminhome");
+        
       }
     } catch {
       console.error('Error logging in: Login Failed');

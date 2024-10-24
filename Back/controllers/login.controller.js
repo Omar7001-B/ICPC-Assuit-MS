@@ -43,6 +43,7 @@ export const loginController = async (req, res) => {
             status: "success",
             message: "User logged in successfully",
             data: inUser.token,
+            role: inUser.roles
         });
     } else {
         return res.status(400).json({
