@@ -14,7 +14,6 @@ export default function ApplicationsForTrainings() {
         },
       });
       console.log(response);
-      
       setApplications(response.data.data);
     } catch (error) {
       console.log("There is Error: ", error.message);
@@ -40,7 +39,7 @@ export default function ApplicationsForTrainings() {
             return (
               <tr key={user._id}>
                 <td>{index+1}</td>
-                <td>{user.firstName + " " + user.lastName}</td>
+                <td>{user.fName + " " + user.lName}</td>
                 <td>{user.level}</td>
                 <td>{user.university}</td>
                 <td>{user.faculty}</td>
