@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
-export default function SideBarHomeNavLink({about,linkto,shadowColor,setShadowColor}){
+export default function SideBarNavLink({about,linkto,shadowColor,setShadowColor}){
     return(
         <NavLink
         to={linkto}

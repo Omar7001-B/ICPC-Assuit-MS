@@ -1,9 +1,9 @@
 import { useState } from "react";
 import SideBarNavLink from "../SideBarNavLink/SideBarNavLink";
 
-export default function SideBarHome() {
+export default function SideBarAdminHome() {
   const [shadowColorTrainings, setShadowColorTrainings] = useState("black");
-  const [shadowColorApplications, setShadowColorApplications] = useState("black");
+  const [shadowColorHistory, setShadowColorHistory] = useState("black");
   return (
     <div
       style={{
@@ -20,15 +20,15 @@ export default function SideBarHome() {
     >
       <SideBarNavLink
         about={"Trainings"}
-        linkto={"/home"}
+        linkto={"/adminhome"}
         shadowColor={shadowColorTrainings}
         setShadowColor={setShadowColorTrainings}
       />
       <SideBarNavLink
-        about={"Applications"}
-        linkto={"/home/applications"}
-        shadowColor={shadowColorApplications}
-        setShadowColor={setShadowColorApplications}
+        about={"Post Training"}
+        linkto={"/adminhome/posttraining"}
+        shadowColor={shadowColorHistory}
+        setShadowColor={setShadowColorHistory}
       />
     </div>
   );

@@ -7,6 +7,9 @@ import Home from "./Pages/Home/Home";
 import TrainingsHome from "./components/TrainingsHome/TrainingsHome";
 import ApplicationsHome from "./components/ApplicationsHome/ApplicationsHome";
 import Settings from "./Pages/Settings/Settings";
+import AdminHome from "./Pages/AdminHome/AdminHome";
+import TrainingsAdminHome from "./components/TrainingsAdminHome/TrainingsAdminHome";
+import PostTrainingAdminHome from "./components/PostTrainingAdminHome/PostTrainingAdminHome";
 const routes = createBrowserRouter([
   { index: true, element: <Landing /> },
   { path: "/login", element: <Login /> },
@@ -20,6 +23,14 @@ const routes = createBrowserRouter([
       { path: "/home/applications", element: <ApplicationsHome /> },
     ],
   },
+  {
+    path: "/adminhome",
+    element: <AdminHome />,
+    children: [
+      { index: true, element: <TrainingsAdminHome /> },
+      { path: "/adminhome/posttraining", element: <PostTrainingAdminHome  /> },
+    ],
+  }
 ]);
 export default function App() {
   return (
