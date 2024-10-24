@@ -22,11 +22,13 @@ export default function ApplicationsForTrainings() {
   const reply= async(applicationId,status,comment)=>{
     try{
       // eslint-disable-next-line no-unused-vars
+      console.log(applicationId+" 1 "+ status);
       const response=await axiosInstance.post("/api/Applications/changeStatus",{
         applicationid:applicationId,
         status:status,
         comment:comment
       });
+      
       window.location.reload();
     }catch(error){
       console.log("There is Error: ", error.message);

@@ -115,10 +115,13 @@ export const getUserApplications = async (req, res) => {
 
 export const changeStatus = async (req, res) => {
   try {
-    const applicationId = req.body.applicationId;
+    console.log("1");
+    
+    const applicationId = req.body.applicationid;
     const newstatus = req.body.status;
     const newcomment = req.body.comment;
-
+    console.log(req.body);
+    
     let application = await Application.findById(applicationId);
     if (!application) {
       console.log("Application not found");
@@ -144,6 +147,8 @@ export const changeStatus = async (req, res) => {
     }
     application.status = newstatus;
     application.comments += newcomment + "\n";
+    console.log(application + "Ak");
+    
     await application.save();
     res.json({ data: application });
   } catch (error) {

@@ -1,12 +1,12 @@
 // src/components/UpdateTraining/UpdateTraining.js
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 import { Form, Button, Alert, Col, Row, Container } from "react-bootstrap";
 import axiosInstance from "../../AxiosConfig/AxiosConfig";
 import { useNavigate, useParams } from "react-router-dom";
 
 const UpdateTraining = () => {
   const navigate = useNavigate();
-  const { trainingId } = useParams(); // Get the training ID from URL params
+  const { id } = useParams(); // Get the training ID from URL params
 
   const [trainingData, setTrainingData] = useState({
     title: "",
@@ -27,20 +27,20 @@ const UpdateTraining = () => {
   useEffect(() => {
     const fetchTraining = async () => {
       try {
-        console.log(trainingId);
-        const response = await axiosInstance.get(`/api/trainings/`, {
+        console.log(id);
+        const response = await axiosInstance.get("/api/trainings/", {
           headers: {
-            id: trainingId,
+            id: id,
           },
         });
-        console.log("retrieve data ", response.data);
+        console.log("retrieve data ", response);
         setTrainingData(response.data);
       } catch (error) {
         console.error("Error fetching training data:", error);
       }
     };
     fetchTraining();
-  }, [trainingId]);
+  }, [id]);
 
   // Validation rules based on the Mongoose model
   const validate = () => {
@@ -89,7 +89,7 @@ const UpdateTraining = () => {
           trainingData,
           {
             headers: {
-              id: trainingId,
+              id: id,
             },
           }
         );
@@ -107,7 +107,7 @@ const UpdateTraining = () => {
   };
 
   return (
-    <Container className="training-form-container">
+    <Container className="training-form-container" style={{padding:"50px"}}>
       <Form onSubmit={handleSubmit}>
         {submitted && (
           <Alert variant="success">Training updated successfully!</Alert>

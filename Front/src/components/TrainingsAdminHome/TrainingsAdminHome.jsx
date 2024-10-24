@@ -76,8 +76,6 @@ export default function TrainingsAdminHome() {
                       variant="outline-success"
                       style={{ margin: "3px 10px" }}
                       onClick={() => {
-                        console.log(training._id);
-                        
                         navigate(`/adminhome/updatetraining/${training._id}`);
                       }}
                     >
