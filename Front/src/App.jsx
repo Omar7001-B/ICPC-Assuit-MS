@@ -12,6 +12,7 @@ import TrainingsAdminHome from "./components/TrainingsAdminHome/TrainingsAdminHo
 import PostTrainingAdminHome from "./components/PostTrainingAdminHome/PostTrainingAdminHome";
 import TraineesForTraining from "./components/TrainingsAdminHome/TraineesForTraining";
 import ApplicationsForTrainings from "./components/TrainingsAdminHome/ApplicationsForTrainings";
+import UpdateTraining from "./components/UpdateTraining/UpdateTraining";
 const routes = createBrowserRouter([
   { index: true, element: <Landing /> },
   { path: "/login", element: <Login /> },
@@ -33,6 +34,7 @@ const routes = createBrowserRouter([
       { path: "/adminhome/posttraining", element: <PostTrainingAdminHome  /> },
       { path: "/adminhome/traineesfortraining/:id", element: <TraineesForTraining/> },
       { path: "/adminhome/applicationsfortrainings/:id", element: <ApplicationsForTrainings/> },
+      { path: "/adminhome/updatetraining/:id", element: <UpdateTraining/> }
     ],
   }
 ]);
