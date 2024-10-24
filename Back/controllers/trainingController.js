@@ -83,7 +83,10 @@ export const getTrainingByIdForUser = async (req, res) => {
 // Get a training session by ID for admin
 
 export const getTrainingById = async (req, res) => {
+  console.log(req.headers);
+  
   let id = req.headers.id;
+  console.log(id);
   if (!id) {
     return res.status(500).json({
       message: "Something went wrong. Please try again.",

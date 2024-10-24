@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
 
 export default function TrainingsAdminHome() {
-    const navigate=useNavigate();
+  const navigate = useNavigate();
   const [trainings, setTrainings] = useState([]);
   const getTrainings = async () => {
     try {
@@ -75,7 +75,10 @@ export default function TrainingsAdminHome() {
                     <Button
                       variant="outline-success"
                       style={{ margin: "3px 10px" }}
-                      onClick={() => {console.log(training.participants);
+                      onClick={() => {
+                        console.log(training._id);
+                        
+                        navigate(`/adminhome/updatetraining/${training._id}`);
                       }}
                     >
                       Update
@@ -92,14 +95,22 @@ export default function TrainingsAdminHome() {
                     <Button
                       variant="outline-secondary"
                       style={{ margin: "3px 10px" }}
-                      onClick={() => {navigate(`/adminhome/traineesfortraining/${training._id}`)}}
+                      onClick={() => {
+                        navigate(
+                          `/adminhome/traineesfortraining/${training._id}`
+                        );
+                      }}
                     >
                       Trainees
                     </Button>
                     <Button
                       variant="outline-dark"
-                      style={{ margin: "3px 10px" ,width:"100%"}}
-                      onClick={() => {navigate(`/adminhome/applicationsfortrainings/${training._id}`)}}
+                      style={{ margin: "3px 10px", width: "100%" }}
+                      onClick={() => {
+                        navigate(
+                          `/adminhome/applicationsfortrainings/${training._id}`
+                        );
+                      }}
                     >
                       Applicants
                     </Button>

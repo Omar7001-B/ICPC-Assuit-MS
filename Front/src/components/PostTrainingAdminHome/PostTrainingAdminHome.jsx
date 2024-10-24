@@ -97,7 +97,7 @@ const PostTrainingAdminHome = () => {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} style={{ padding: "50px" }}>
       {submitted && (
         <Alert variant="success">Training created successfully!</Alert>
       )}
