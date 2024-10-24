@@ -11,6 +11,7 @@ import AdminHome from "./Pages/AdminHome/AdminHome";
 import TrainingsAdminHome from "./components/TrainingsAdminHome/TrainingsAdminHome";
 import PostTrainingAdminHome from "./components/PostTrainingAdminHome/PostTrainingAdminHome";
 import TraineesForTraining from "./components/TrainingsAdminHome/TraineesForTraining";
+import ApplicationsForTrainings from "./components/TrainingsAdminHome/ApplicationsForTrainings";
 const routes = createBrowserRouter([
   { index: true, element: <Landing /> },
   { path: "/login", element: <Login /> },
@@ -30,7 +31,8 @@ const routes = createBrowserRouter([
     children: [
       { index: true, element: <TrainingsAdminHome /> },
       { path: "/adminhome/posttraining", element: <PostTrainingAdminHome  /> },
-      { path: "/adminhome/traineesfortraining/:trainees", element: <TraineesForTraining/> },
+      { path: "/adminhome/traineesfortraining/:id", element: <TraineesForTraining/> },
+      { path: "/adminhome/applicationsfortrainings/:id", element: <ApplicationsForTrainings/> },
     ],
   }
 ]);

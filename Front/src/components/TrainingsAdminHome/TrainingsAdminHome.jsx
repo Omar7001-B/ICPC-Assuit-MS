@@ -90,18 +90,18 @@ export default function TrainingsAdminHome() {
                       Delete
                     </Button>
                     <Button
-                      variant="outline-success"
+                      variant="outline-secondary"
                       style={{ margin: "3px 10px" }}
-                      onClick={() => {navigate(`/adminhome/traineesfortraining/`,{trainees:training.participants})}}
+                      onClick={() => {navigate(`/adminhome/traineesfortraining/${training._id}`)}}
                     >
                       Trainees
                     </Button>
                     <Button
-                      variant="outline-success"
-                      style={{ margin: "3px 10px" }}
-                      onClick={() => {}}
+                      variant="outline-dark"
+                      style={{ margin: "3px 10px" ,width:"100%"}}
+                      onClick={() => {navigate(`/adminhome/applicationsfortrainings/${training._id}`)}}
                     >
-                      Update
+                      Applicants
                     </Button>
                   </div>
                 </Card.Body>
