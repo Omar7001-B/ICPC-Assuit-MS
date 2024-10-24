@@ -24,9 +24,8 @@ export default function TraineesForTraining() {
       const response = await axiosInstance.delete("/api/trainings/participants", {
         headers: {
           id: id,
-          userId:_id
         },
-    })
+    },_id);
      }catch(error){
       console.log("There is Error: ", error.message);
     }
