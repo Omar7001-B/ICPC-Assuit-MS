@@ -76,7 +76,7 @@ export default function TrainingsHome() {
             const date = new Date();
             if (training && date <= new Date(training.deadline)) {
               return (
-                <Card key={training.id} style={{ width: "20rem" ,height:"30vh",backgroundColor:"#dfdfdf"}}>
+                <Card key={training.id} style={{ width: "20rem" ,height:"30vh",backgroundColor:"#dfdfdf",marginBottom:"20px"}}>
                   <Card.Body>
                     <Card.Title style={{height:"5vh"}}>{training.title}</Card.Title>
                     <Card.Title>{training.level}</Card.Title>

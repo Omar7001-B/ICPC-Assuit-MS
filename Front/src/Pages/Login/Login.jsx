@@ -16,7 +16,7 @@ export default function Login() {
       password: password,
     };
     try {
-      const response = await axiosInstance.post('api/auth/login', loginData);
+      const response = await axiosInstance.post('/api/auth/login', loginData);
       if(response.status==="fail"){
         setErrorMessage(1);
       }else{

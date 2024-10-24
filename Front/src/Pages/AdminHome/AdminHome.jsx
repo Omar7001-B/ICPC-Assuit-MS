@@ -11,7 +11,7 @@ export default function AdminHome() {
       <NavBarHome />
       <Container style={{ margin: "0px", width: "100vw" }}>
         <Row>
-          <Col xs={3} style={{ padding: "0px" }}>
+          <Col xs={3} style={{ padding: "0px" ,backgroundColor:"black"}}>
             <SideBarAdminHome/>
           </Col>
           <Col xs={9} style={{ padding: "0px 0px" }}>

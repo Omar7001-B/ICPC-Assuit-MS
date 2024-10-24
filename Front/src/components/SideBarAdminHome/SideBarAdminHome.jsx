@@ -3,7 +3,7 @@ import SideBarNavLink from "../SideBarNavLink/SideBarNavLink";
 
 export default function SideBarAdminHome() {
   const [shadowColorTrainings, setShadowColorTrainings] = useState("black");
-  const [shadowColorHistory, setShadowColorHistory] = useState("black");
+  const [shadowColorPostTraining, setShadowColorPostTraining] = useState("black");
   return (
     <div
       style={{
@@ -27,8 +27,8 @@ export default function SideBarAdminHome() {
       <SideBarNavLink
         about={"Post Training"}
         linkto={"/adminhome/posttraining"}
-        shadowColor={shadowColorHistory}
-        setShadowColor={setShadowColorHistory}
+        shadowColor={shadowColorPostTraining}
+        setShadowColor={setShadowColorPostTraining}
       />
     </div>
   );
