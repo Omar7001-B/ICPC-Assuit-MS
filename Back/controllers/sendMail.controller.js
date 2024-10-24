@@ -97,7 +97,8 @@ const isVerifiedEmailController = async (req, res) => {
 
   try {
 
-    const code = req.body.code; // cast the code to integer value
+    const code = req.body.code; 
+    console.log(haseddCode);
     await bcrypt.compare(code, haseddCode, (err, result) => {
       if (result) {
         res.status(200).json({

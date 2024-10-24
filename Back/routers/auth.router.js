@@ -23,3 +23,6 @@ authRouter.post("/api/auth/resetPassword", ResetPass.resetPasswordController);
 authRouter.get("/api/auth/getRole" , verifyToken , authorizeRoles("Admin" , "User") , getRoleController);
 
 export default authRouter;
+
+
+// api/auth/signup

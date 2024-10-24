@@ -36,7 +36,7 @@ mongoose
 
 app.use("/role", roleRouter);
 app.use("/api/trainings", trainingRouter); // Omar
-app.use("/api/emailVerification", emailVerificationRouter); // Following /api/emailVerification style
+app.use("/api/gmail", emailVerificationRouter); // Following /api/emailVerification style
 app.use(authRouter);
 app.use(codeforcesRouter);
 app.use("/api/users", verifyToken , userRouter); // do not delete the fucking verifyToken
