@@ -6,7 +6,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import ICPCLogo from "../../assets/Images/ICPC-Logo.png"
 export default function Signup() {
   const navigate = useNavigate();
   const [logoShadow, setLogoShadow] = useState(false && currentStep == 3);
@@ -291,7 +291,7 @@ export default function Signup() {
             }}
           >
             <img
-              src="/src/assets/Images/ICPC-Logo.png"
+              src={ICPCLogo}
               alt="ICPC Assiut"
               style={{
                 height: "300px",
