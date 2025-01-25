@@ -27,7 +27,7 @@ export default function Founders() {
         <Row>
           <Col xs={6}>
             <OurCard
-              src="../../../public/Hussien-Ibrahim.jpg"
+              src="/Hussien-Ibrahim.jpg"
               alt="Hussien Ibrahim Photo"
               name="Hussien Ibrahim"
               info=" Software Engineer 2 at Microsoft with strong background in competitive programming and problem solving"
