@@ -46,7 +46,7 @@ export default function Login() {
   const [logoDescriptiontextShadow, setLogoDescriptiontextShadow] = useState("0px 0px 0px black");
   const [forgetPasswordColor, setForgetPasswordColor] = useState("#dfdfdf");
   const [signUPColor, setSignUPColor] = useState("#dfdfdf");
-
+  
   useEffect(() => {
     if (logoShadow) {
       setLogoBoxShadowBlur("40px");
@@ -56,6 +56,10 @@ export default function Login() {
       setLogoDescriptiontextShadow("0px 0px 0px black");
     }
   }, [logoShadow]);
+  
+  useEffect(()=>{
+    setErrorMessage(0);
+  },[gmail,password])
 
   return (
     <div
