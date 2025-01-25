@@ -1,7 +1,8 @@
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-
+import ICPCOriginalLogo from "../../assets/Images/ICPC-Original-Logo.png"
+import ICPCLogo from "../../assets/Images/ICPC-Logo.png"
 export default function AboutUs() {
   return (
     <div id="aboutus" style={{ padding: "40px 0px" }}>
@@ -32,7 +33,7 @@ export default function AboutUs() {
           </Col>
           <Col xs={4}>
             <img
-              src="/src/assets/Images/ICPC-Original-Logo.png"
+              src={ICPCOriginalLogo}
               alt="ICPC Logo"
               style={{ height: "350px" }}
             />
@@ -43,7 +44,7 @@ export default function AboutUs() {
         <Row>
           <Col xs={4}>
             <img
-              src="/src/assets/Images/ICPC-Logo.png"
+              src={ICPCLogo}
               alt="ICPC Assiut Logo"
               style={{ height: "350px" }}
             />

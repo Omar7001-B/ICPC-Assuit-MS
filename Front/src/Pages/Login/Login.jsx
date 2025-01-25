@@ -6,6 +6,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../../AxiosConfig/AxiosConfig";
+import ICPCLogo from "../../assets/Images/ICPC-Logo.png"
 export default function Login() {
   
   const [gmail, setGmail] = useState('');
@@ -78,7 +79,7 @@ export default function Login() {
             }}
           >
             <img
-              src="/src/assets/Images/ICPC-Logo.png"
+              src={ICPCLogo}
               alt="ICPC Assiut"
               style={{
                 height: "300px",

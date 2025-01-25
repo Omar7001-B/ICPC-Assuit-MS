@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Link, useNavigate } from "react-router-dom";
-
+import ICPCLogo from "../../assets/Images/ICPC-Logo.png"
 export default function Settings() {
     const navigate = useNavigate();
     const [logoShadow, setLogoShadow] = useState(false);
@@ -91,7 +91,7 @@ export default function Settings() {
                         }}
                     >
                         <img
-                            src="/src/assets/Images/ICPC-Logo.png"
+                            src={ICPCLogo}
                             alt="ICPC Assiut"
                             style={{
                                 height: "300px",

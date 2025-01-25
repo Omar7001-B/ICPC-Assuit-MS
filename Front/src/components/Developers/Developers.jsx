@@ -2,7 +2,11 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import OurCard from "../OurCard/OurCard";
-
+import MohamedRamadan from "../../assets/Images/Mohamed-Ramadan.jpg"
+import AbdulrahmanAyman from "../../assets/Images/Abdulrahman-Ayman.jpg"
+import AbdelrhmanHany from "../../assets/Images/Abdelrhman-Hany.jpg"
+import MohamedShamsElDeen from "../../assets/Images/Mohamed-Shams-El-Deen.jpg"
+import OmarAbdelrahman from "../../assets/Images/Omar-Abdelrahman.jpg"
 export default function Developers() {
   return (
     <div
@@ -28,7 +32,7 @@ export default function Developers() {
         <Row className="mb-5">
           <Col>
             <OurCard
-              src="/src/assets/Images/Mohamed-Ramadan.jpg"
+              src={MohamedRamadan}
               alt="Mohamed Ramadan Photo"
               name="Mohamed Ramadan"
               info="Mentor at ICPC Assiut Community"
@@ -39,7 +43,7 @@ export default function Developers() {
         <Row className="mb-5">
           <Col>
             <OurCard
-              src="/src/assets/Images/Abdulrahman-Ayman.jpg"
+              src={AbdulrahmanAyman}
               alt="Abdulrahman Ayman Photo"
               name="Abdulrahman Ayman"
               info="ECPC Finalist and Mentor at ICPC Assiut Community"
@@ -49,7 +53,7 @@ export default function Developers() {
           <Col></Col>
           <Col>
             <OurCard
-              src="/src/assets/Images/Abdelrhman-Hany.jpg"
+              src={AbdelrhmanHany}
               alt="Abdelrhman Hany Photo"
               name="Abdelrhman Hany"
               info="2x ECPC Finalist,Vice Chairman and Mentor at ICPC Assiut Community"
@@ -60,7 +64,7 @@ export default function Developers() {
         <Row>
           <Col>
             <OurCard
-              src="/src/assets/Images/Mohamed-Shams-El-Deen.jpg"
+              src={MohamedShamsElDeen}
               alt="Mohamed Shams El-Deen Photo"
               name="Mohamed Shams El-Deen"
               info="Mentor at ICPC Assiut Community"
@@ -69,7 +73,7 @@ export default function Developers() {
           </Col>
           <Col>
             <OurCard
-              src="/src/assets/Images/Omar-Abdelrahman.jpg"
+              src={OmarAbdelrahman}
               alt="Omar Abdelrahman Photo"
               name="Omar Abdelrahman"
               info="Specialist at codeforces and mentor at icpc assuit"

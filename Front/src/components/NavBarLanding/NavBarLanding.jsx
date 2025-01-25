@@ -1,7 +1,7 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-
+import ICPCLogo from "../../assets/Images/ICPC-Logo.png"
 export default function NavBarLanding() {
   return (
     <>
@@ -10,7 +10,7 @@ export default function NavBarLanding() {
         <Navbar.Brand href="#home">
             <img
               alt=""
-              src="/src/assets/Images/ICPC-Logo.png"
+              src={ICPCLogo}
               width="35"
               height="35"
               className="d-inline-block align-center"
