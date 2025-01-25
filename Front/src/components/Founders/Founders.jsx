@@ -2,7 +2,6 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import OurCard from "../OurCard/OurCard";
-import HussienIbrahim from "../../assets/Images/Hussien-Ibrahim.jpg"
 export default function Founders() {
   return (
     <div
@@ -28,7 +27,7 @@ export default function Founders() {
         <Row>
           <Col xs={6}>
             <OurCard
-              src={HussienIbrahim}
+              src="../../assets/Images/Hussien-Ibrahim.jpg"
               alt="Hussien Ibrahim Photo"
               name="Hussien Ibrahim"
               info=" Software Engineer 2 at Microsoft with strong background in competitive programming and problem solving"
